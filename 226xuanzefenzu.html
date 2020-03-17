@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>选择分组</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+	<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<body style="background: #F5F6F9;">
+		<div class="header on">
+			<img class="go_back" src="img/fanhui.png" ><h1>选择分组</h1><span class="reture">完成</span>
+		</div>
+		<div class="content groupgl">
+			<div class="box1">
+				<div class="list">
+					<ul>
+						<!-- <li class="on">好友</li>
+						<li>同学</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var memberId = getUrlParam('memberId');
+			var source_group_id = getUrlParam('source_group_id') || 0;
+			var source_uid = getUrlParam('source_uid') || 0;
+			var source = getUrlParam('source') || 0;
+			
+			$aJax.get('/api/buddygroup/getgrouplists',{
+				user_token:localStorage.getItem('token'),
+			},function(res){
+				console.log(res);
+				var data = res.data
+				if(data){
+					var html = data.map(function(item){
+						return `<li data-id="${item.id}">${item.title}</li>`
+					}).join('');
+					$('.list ul').html(html);
+					$('.list ul li').eq(0).addClass('on');
+					source_group_id =$('.list ul li').eq(0).attr('data-id')
+				}
+			})
+			
+			$(document).on('click','.list ul li',function(){
+				source_group_id =$(this).attr('data-id')
+				$('.list ul li').removeClass('on');
+				$(this).addClass('on');
+			})
+			
+			$(document).on('click','.reture,.go_back',function(){
+				window.location.href = '225tianjiahaoyou.html?memberId=' + memberId + '&source_group_id=' + source_group_id + '&source_uid=' + source_uid + '&source=' + source
+			})
+			// 
+			
+		})
+	</script>
+</html>

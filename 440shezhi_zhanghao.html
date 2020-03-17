@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>设置</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+	</style>
+	<body style="background: #F5F6FA;">
+		<div class="content set">
+			<div class="box1">
+				<ul>
+					<li><a href="440genghuanshoujihao.html">更换手机号 <span style="color: #04091B;">13800138000<img src="img/wode08.png" ></span></a></li>
+				</ul>
+			</div>
+			<div class="box1">
+				<ul>
+					<li><a href="440denglumima.html">登录密码 <span>已设置<img src="img/wode08.png" ></span></a></li>
+					<li><a id="zhifu" href="">支付密码 <span>未设置<img src="img/wode08.png" ></span></a></li>
+				</ul>
+			</div>
+			<div class="box1">
+				<ul>
+					<li><a href="www.tuicu.com">退出当前账号 <span><img src="img/wode08.png" ></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var yonghu = yonghu()
+		console.log(yonghu)
+		$(document).ready(function() {
+			if(yonghu.pay_password){
+				$('#zhifu').prop('href','440zhifumima1.html');
+				$('#zhifu').html(`支付密码<span>已设置<img src="img/wode08.png" ></span>`)
+			}else{
+				$('#zhifu').prop('href','440zhifumima.html')
+			}
+			
+			
+		})
+ 	</script>
+</html>

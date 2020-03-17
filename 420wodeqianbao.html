@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>钱包</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div class="content my_wallet">
+			<a href="421shiming.html">
+			<div class="box1">
+				实名后才能使用余额，立即去实名 <img src="img/wode08.png" >
+			</div>
+			</a>
+			<div class="box2">
+				<h3>余额(元)</h3>
+				<p id="total">0.00</p>
+				<ul>
+					<a href="422chongzhi.html"><li>
+						<img src="img/qianb03.png" >充值
+					</li></a>
+					<li>
+						<img src="img/qianb04.png" >提现
+					</li>
+				</ul>
+			</div>
+			<div class="box3">
+				<ul>
+					<li>
+						<a href="154hongbaojilu_shou.html">
+							<img src="img/qianb05.png" >
+							<p>红包记录</p>
+						</a>
+					</li>
+					<li>
+						<a href="161zhuanzhangjilu.html">
+							<img src="img/qianb06.png" >
+							<p>转账记录</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var yonghu = yonghu()
+		$(document).ready(function() {
+			
+			console.log(yonghu);
+			$('#total').text(yonghu.money)
+		})
+	</script>
+</html>

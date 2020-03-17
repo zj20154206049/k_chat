@@ -1,0 +1,366 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+form,
+button,
+input,
+textarea,
+th,
+td {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i {
+    font: normal 12px/1.5 "Helvetica Neue", "Microsoft YaHei", Helvetica, STHeiTi, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+	display: block;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    vertical-align: top;
+    border: 0;
+}
+body{
+	background: #fff;
+	-webkit-tap-highlight-color:transparent;
+	cursor: pointer;
+	-webkit-overflow-scrolling: touch;
+}
+button,
+input,
+textarea {
+    font-size: 100%;
+    vertical-align: middle;
+    outline: none;
+    -moz-appearance: none;
+    appearance: none;
+	appearance:none !important;
+	-webkit-appearance:none !important;
+	border-radius: 0;
+
+}
+input[type="checkbox"], input[type="radio"] {
+	display: none;
+    -webkit-appearance: none;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+div,
+a {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+.ww768 {
+	display: none;
+}
+@media only screen and (max-width: 768px){
+	.ww768 {
+		display: block;
+	}
+}
+.left{
+	float: left;
+}
+.right {
+	float: right;
+}
+
+.clearfloat{
+	clear: both;
+	zoom: 1;
+}
+.clearfloat:after{
+	content:".";
+	height:0;
+	visibility:hidden;
+	display:block;
+	clear:both;
+}
+.banner .swiper-slide img {
+	width: 100%;
+}
+.phone_banner .swiper-slide {
+	height: 240px;
+	background-size: auto 100%;
+	background-position: center;
+}
+.phone_banner .swiper-slide a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.banner .swiper-pagination-bullet{
+	width: 12px;
+	height: 12px;
+	background: #fff;
+	border-radius: 50%;
+	opacity: 1;
+	transition: all .5s;
+	margin: 0 8px !important;
+}
+.banner .swiper-pagination-bullet-active{
+	background: #004885;
+}
+.phone_banner .swiper-pagination-bullet{
+	width: .3rem;
+	height: 3px;
+	background: #fff;
+	border-radius: 0;
+	opacity: 1;
+	transition: all .5s;
+
+}
+.phone_banner .swiper-pagination-bullet-active{
+	background: #004885;
+}
+
+.content{
+	padding-bottom: 1.2rem;
+}
+.fixed{
+	position: fixed;
+}
+body{
+	background: #fff;
+}
+.footer {
+	clear: both;
+	overflow: hidden;
+	padding: .13rem 0;
+	position: fixed;
+	width: 100%;
+	z-index: 99999999999999;
+	left: 0;
+	bottom: 0;
+	box-shadow:0px -1px 6px 0px rgba(36,34,33,0.08);
+	background: #EBE7D8;
+}
+.footer ul li{
+	font-size: .22rem;
+	color: #999999;
+	width: 20%;
+	float: left;
+	text-align: center;
+}
+.footer ul li.on{
+	color: #D13C37;
+}
+.footer ul li p {
+	color: #999999;
+	margin-top: .14rem;
+}
+.footer ul li.on p{
+	color: #C09B6F;
+}
+.footer ul li .img {
+	height: .4rem;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.footer ul li:nth-child(1) .img{
+	background-image: url(../img/icon06.png);
+}
+.footer ul li:nth-child(2) .img{
+	background-image: url(../img/icon07.png);
+}
+.footer ul li:nth-child(3) .img{
+	background-image: url(../img/icon08.png);
+}
+.footer ul li:nth-child(4) .img{
+	background-image: url(../img/icon09.png);
+}
+.footer ul li:nth-child(5) .img{
+	background-image: url(../img/icon10.png);
+}
+.footer ul li.on:nth-child(1) .img{
+	background-image: url(../img/icon01.png);
+}
+.footer ul li.on:nth-child(2) .img{
+	background-image: url(../img/icon02.png);
+}
+.footer ul li.on:nth-child(3) .img{
+	background-image: url(../img/icon03.png);
+}
+.footer ul li.on:nth-child(4) .img{
+	background-image: url(../img/icon04.png);
+}
+.footer ul li.on:nth-child(5) .img{
+	background-image: url(../img/icon05.png);
+}
+
+.no_list{
+	text-align: center;
+}
+.no_list img{
+	width:2.23rem;
+	margin: 2.77rem auto 0;
+}
+.no_list p{
+	margin-top: .28rem;
+	font-size:.28rem;
+	font-family:PingFang-SC-Regular;
+	font-weight:400;
+	color:rgba(102,102,102,1);
+	line-height:.44rem;
+}
+.no_list a{
+	margin-top: .4rem;
+	display: inline-flex;
+	width:2.08rem;
+	height:.68rem;
+	background:rgba(255,255,255,1);
+	border:1px solid rgba(192,155,111,1);
+	border-radius:.34rem;
+	box-sizing: border-box;
+	justify-content: center;
+	align-items: center;
+	font-size:.3rem;
+	font-family:PingFang-SC-Regular;
+	font-weight:400;
+	color:rgba(192,155,111,1);
+}
+.no_list button{
+	display: block;
+	border: none;
+	margin: 0.8rem auto 0;
+	width:3.35rem;
+	height:0.84rem;
+	background:rgba(79,162,247,1);
+	border-radius:0.04rem;
+	font-size:0.36rem;
+	font-family:PingFang SC;
+	font-weight:500;
+	color:rgba(255,255,255,1);
+}
+.layui-layer-loading{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+}
+
+.line1{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+.line2{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.line3{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+.header{
+	z-index: 999;
+	position: fixed;
+	height: 0.86rem;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: .34rem;
+}
+.header.selected{
+	padding-top: 0.6rem;
+}
+.header.selected .go_back{
+	margin-top: .13rem;
+}
+.header.selected span{
+	top:.58rem;
+}
+.header .go_back{
+	position: absolute;
+	left: 0.3rem;
+	top: 50%;
+	margin-top: -.02rem;
+	width:0.19rem;
+	height:0.34rem;
+}
+.header h1{
+	font-size:0.36rem;
+	font-family:PingFang SC;
+	font-weight:bold;
+	color:rgba(255,255,255,1);
+}
+.header span{
+	position: absolute;
+	right: 0.3rem;
+	top: .34rem;
+	font-size:0.36rem;
+	font-family:PingFang SC;
+	font-weight:bold;
+	color:rgba(255,255,255,1);
+	line-height: 0.88rem;
+}
+.header span img{
+	width:0.44rem;
+	height:0.42rem;
+	margin-top: 0.18rem;
+}
+.header.on{
+	background: #fff;
+}
+.header.on h1{
+	color: #222222;
+}
+.header.on span{
+	color: #222222;
+}

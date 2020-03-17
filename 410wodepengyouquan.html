@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我的朋友圈</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/dynamic.css"/>
+	</head>
+	<body>
+		<div class="content dynamic">
+			<div class="box1">
+				<img class="big-img" src="img/pyq12.png">
+				<div class="img">
+					andy <img src="img/shiming02.png">
+				</div>
+				<div class="bg"></div>
+			</div>
+			<div class="box3 my_dynamic">
+				<div class="list">
+					<ul>
+						<li>
+							<a href="300pengyouquanxq.html">
+								<div class="sub_time"><span>23</span>11月</div>
+								<div class="p">
+									夏天的飞鸟，飞到我的窗前歌唱，又飞去 了。秋天的黄叶，它们没有什么可唱，只叹息 一声，飞落在那里。
+								</div>
+								<div class="btn">展开</div>
+								<div class="video">
+									<video width="" height="">
+										<source src="mp4/mp4%20(2).mp4" type="video/mp4">
+										</source>
+									</video>
+									<img src="img/fabiaodt03.png">
+								</div>
+								<div class="time">
+									<p class="delete">删除</p>
+									<div class="i pinglun"></div>
+									<div class="i dianzan"></div>
+								</div>
+								<div class="text">
+									<div class="title">
+										<img src="img/pyq08.png">陆聪、张珊宇、Alecia
+									</div>
+									<dl>
+										<dt>陆聪：</dt>
+										<dd>世界上的一对小小的漂泊者呀，请留下你 们的足印在我的文字里。</dd>
+									</dl>
+									<dl>
+										<dt>andy<span>回复</span>陆聪：</dt>
+										<dd>世界上的一对小小的漂泊者呀，请留下你 们的足印在我的文字里。</dd>
+									</dl>
+								</div>
+							</a>
+						</li>
+						<li>
+							<div class="sub_time"><span>23</span>11月</div>
+							<div class="p">
+								夏天的飞鸟，飞到我的窗前歌唱，又飞去 了。秋天的黄叶，它们没有什么可唱，只叹息 一声，飞落在那里。
+							</div>
+							<div class="img">
+								<img src="img/qianb02.png">
+							</div>
+							<div class="time">
+								<p class="delete">删除</p>
+								<div class="i pinglun"></div>
+								<div class="i dianzan"></div>
+							</div>
+							<div class="text">
+								<div class="title">
+									<img src="img/pyq08.png">陆聪、张珊宇、Alecia
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="sub_time"><span>23</span>11月</div>
+							<div class="img_list">
+								<img src="img/qianb02.png">
+								<img src="img/erwm01.png">
+								<img src="img/pyq14.png">
+								<img src="img/qianb02.png">
+							</div>
+							<div class="time">
+								<p class="delete">删除</p>
+								<div class="i pinglun"></div>
+								<div class="i dianzan on"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="model" style="display: none;">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<!-- <div class="swiper-slide">
+						<img src="img/qianb02.png">
+					</div> -->
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+		<div class="model2" style="display: none;">
+			<input type="text" name="" id="" value="" placeholder="回复" />
+		</div>
+		
+		<div class="model3" style="display: none;">
+			<ul>
+				<li>视频</li>
+				<li>图片</li>
+				<li>取消</li>
+			</ul>
+		</div>
+		<div class="model4" style="display: none;">
+			<ul>
+				<li>更换相册封面</li>
+				<li>取消</li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			//图片列表的图片点击时
+			$('.img_list img').click(function(){
+				var index = $(this).index();
+				layer.load(2);
+				$('.model').fadeIn();
+				var imgList = [];
+				var len = $(this).parents('.img_list').find('img').length;
+				var html = '';
+				for (var i=0;i<len;i++) {
+					var src = $(this).parents('.img_list').find('img').eq(i).attr('src');
+					html += `<div class="swiper-slide"><img src="`+src+`"></div>`
+				}
+				$('.model .swiper-wrapper').html(html);
+				var swiper = new Swiper('.model .swiper-container', {
+					observer:true, // 修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true, // 修改swiper的父元素时，自动初始化swiper
+					pagination: {
+						el: '.model .swiper-pagination',
+						dynamicBullets: true,
+					},
+				});
+				swiper.slideTo(index);
+				layer.closeAll();
+			})
+			
+			//单张图片点击时
+			$('.img img').click(function(){
+				layer.load(2);
+				$('.model').fadeIn();
+				var imgList = [];
+				var src = $(this).attr('src');
+				var html = `<div class="swiper-slide"><img src="`+src+`"></div>`;
+				$('.model .swiper-wrapper').html(html);
+				var swiper = new Swiper('.model .swiper-container', {
+					observer:true, // 修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true, // 修改swiper的父元素时，自动初始化swiper
+				});
+				layer.closeAll();
+			})
+			
+			$(document).on('click','.model',function(){
+				$('.model').fadeOut();
+			});
+			$(document).on('click','.model img',function(e){
+				e.stopPropagation();//阻止冒泡
+			})
+			
+			
+			//点击发表动态的时候触发
+			$('.box1 .sub').click(function(){
+				var html = '<div class="model3">'+$('.model3').html()+'</div>'
+				layer.open({
+					title:false,
+					closeBtn:false,
+					shadeClose:true,
+					shift :2,
+					shade: [0.8, '#000'],
+					offset: 'lb',
+				    type:1,
+				    skin: 'model3', //加上边框
+				    area: ['100%', ''], //宽高
+				    content: html
+				});
+			})
+			
+			//点击朋友圈封面,更换封面的时候触发
+			$('.box1 .big-img').click(function(){
+				window.location.href = 'www.genghuanxiangce.com'
+				// var html = '<div class="model4">'+$('.model4').html()+'</div>'
+				// layer.open({
+				// 	title:false,
+				// 	closeBtn:false,
+				// 	shadeClose:true,
+				// 	shift :2,
+				// 	shade: [0.8, '#000'],
+				// 	offset: 'lb',
+				//     type:1,
+				//     skin: 'model4', //加上边框
+				//     area: ['100%', ''], //宽高
+				//     content: html
+				// });
+			})
+			
+
+		})
+	</script>
+</html>

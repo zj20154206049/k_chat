@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>发红包</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<body style="background: #F5F6FA;">
+		<div class="content fahongbao">
+			<div class="header" style="background: #EA4158;">
+				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png" ></a><h1>发红包</h1>
+			</div>
+			<div class="box1">
+				<ul>
+					<a href="150fahongbao.html"><li>拼手气红包</li></a>
+					<li class="on">语音红包</li>
+				</ul>
+			</div>
+			<div class="box2">
+				<label>
+					设置口令 <input type="number" name="" id="text" value="" placeholder="输入文字口令" />
+				</label>
+				<label>
+					总金额 <span>元</span> <input type="number" name="" id="total" value="" placeholder="输入金额" />
+				</label>
+			</div>
+			<button type="button" class="btn">塞钱</button>
+		</div>
+		<div class="model" style="display: none;">
+			<div class="title">请输入支付密码</div>
+			<img class="close" src="img/hognbao07.png" >
+			<h3>K聊红包</h3>
+			<p class="total"><span>￥</span>0.00</p>
+			<h4>支付方式 <span>余额</span></h4>
+			<div class="input">
+				<input type="password" name="" id="" value="" maxlength="1" />
+				<input type="password" name="" id="" value="" maxlength="1" />
+				<input type="password" name="" id="" value="" maxlength="1" />
+				<input type="password" name="" id="" value="" maxlength="1" />
+				<input type="password" name="" id="" value="" maxlength="1" />
+				<input type="password" name="" id="" value="" maxlength="1" />
+			</div>
+			<input type="number" name="" id="" value="" class="hide" maxlength="6" />
+		</div>
+	</body>
+	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var uid_id = getUrlParam('uidId');
+			var token = localStorage.getItem('token')
+			var fengmian = 1;
+			// 封面选项卡
+			$('.tab ul li').click(function(){
+				$('.tab ul li').removeClass('on');
+				$(this).addClass('on');
+				fengmian = $(this).index()+1;
+			})
+			
+			$('.btn').click(function(){
+				
+				// 获取红包的内容
+				// var num = $('#num').val();
+				var total = $('#total').val();
+				var text = $('#text').val();
+				var remarks = $('#remarks').val();
+				if(total==''||text==''){layer.msg('请输入内容');return false;};
+				
+				
+				$('.total').html(`<span>￥</span>`+total+``);
+				var html = '<div class="model">'+$('.model').html()+'</div>'
+				// console.log(html);
+				layer.open({
+					title:false,
+					closeBtn:false,
+					shadeClose:false,
+					shift :5,
+					shade: [0.8, '#000'],
+				    type:1,
+				    skin: 'model_hongbao', //加上边框
+				    area: ['92%', ''], //宽高
+				    content: html
+				});
+			})
+			
+			$(document).on('keyup','.model_hongbao .hide',function(){
+				var val = $('.model_hongbao .hide').val();
+				var length = $('.model_hongbao .hide').val().length
+				if (length >= 6) {
+					val = val.substring(0,6);
+					$('.model_hongbao .hide').val(val);
+					// 获取红包的内容
+					$aJax.post('/api/member/giveouthb',{
+						user_token:token,
+						open_type:1, //0普通红包，1语音红包
+						to_uid:uid_id, //id
+						total:$('#total').val(),
+						count:1,
+						pay_password:val,
+						remarks:$('#text').val(),
+					},function(res){
+						console.log(res);
+						
+						if(res.code=='1'){
+							layer.msg('发送成功');
+							setTimeout(function(){
+								window.location.href = 'www.zhifu.com?id=' + res.data.hb_id + '&bgImg=' + fengmian
+							},500)
+							// 
+						}else{
+							layer.msg(res.msg);
+						}
+					})
+					//给APP用!支付完成的回调
+					
+				}
+				dome(val)
+			})
+			$(document).on('click','.close',function(){
+				layer.closeAll()
+			})
+			
+			function dome (value){
+				$('.model_hongbao .input').find('input').val('')
+				for (var i=0;i<value.length;i++) {
+					$('.model_hongbao .input').find('input').eq(i).val(value[i])
+				}
+			}
+			
+		})
+	</script>
+</html>

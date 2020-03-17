@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>转账详情</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div class="header on">
+			<a href="www.fanhui.com" ><img class="go_back" src="img/fanhui.png" ></a><h1>向好友转账</h1><a href="161zhuanzhangjilu.html"><span>转账记录</span></a>
+		</div>
+		<div class="content payment">
+			<div class="box3">
+				<img src="img/zhuanzhang01.png" >
+				<h3 id="text">待确认收款</h3>
+				<p id="total"><span>￥</span>0.00</p>
+				<button type="button">确认收款</button>
+				<h4 style="margin-top: 0.3rem;">1天内未确认，将退还给对方</h4>
+			</div>
+		</div>
+	</body>
+	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			var id = getUrlParam('id');
+			// /api/member/hbinfo   /api/member/openhb
+			$aJax.get('/api/member/hbinfo',{id:id,user_token:localStorage.getItem('token')},function(res){
+				console.log(res);
+				if(res.data.lists){
+					$('#total').html(`<span>￥</span>`+res.data.lists.price+``);
+					if (res.data.lists.receive_status=='0') {
+						$('#text').text('支付成功，待好友收款')
+					} else if (res.data.lists.receive_status=='1') {
+						$('#text').text('收款成功');
+						$('button').hide(0);
+					} else if (res.data.lists.receive_status=='2') {
+						$('#text').text('24小时未收款，已退回')
+						$('button').hide(0);
+					}
+				}else{
+					$('#total').html(`<span>￥</span>`+res.data.info.price+``);
+					if (res.data.info.receive_status=='0') {
+						$('#text').text('支付成功，待好友收款')
+					} else if (res.data.info.receive_status=='1') {
+						$('#text').text('收款成功');
+						$('button').hide(0);
+					} else if (res.data.info.receive_status=='2') {
+						$('#text').text('24小时未收款，已退回')
+						$('button').hide(0);
+					}
+				}
+			})
+			
+			$('button').click(function(){
+				$aJax.get('/api/member/openhb',{id:id,user_token:localStorage.getItem('token')},function(res){
+					console.log(res);
+					if(res.data.lists){
+						$('#total').html(`<span>￥</span>`+res.data.lists.price+``);
+						if (res.data.lists.receive_status=='0') {
+							$('#text').text('支付成功，待好友收款')
+						} else if (res.data.lists.receive_status=='1') {
+							$('#text').text('收款成功');
+							$('button').hide(0);
+						} else if (res.data.lists.receive_status=='2') {
+							$('#text').text('24小时未收款，已退回')
+							$('button').hide(0);
+						}
+					}else{
+						$('#total').html(`<span>￥</span>`+res.data.info.price+``);
+						if (res.data.info.receive_status=='0') {
+							$('#text').text('支付成功，待好友收款')
+						} else if (res.data.info.receive_status=='1') {
+							$('#text').text('收款成功');
+							$('button').hide(0);
+						} else if (res.data.info.receive_status=='2') {
+							$('#text').text('24小时未收款，已退回')
+							$('button').hide(0);
+						}
+					}
+				})
+			})
+			
+		})
+	</script>
+</html>

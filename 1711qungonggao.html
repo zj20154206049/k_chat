@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>群公告</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<body style="background: #F5F6F9;">
+		<div class="header on">
+			<a href="www.fanhui.com"><img class="go_back" src="img/fanhui.png" ></a><h1>群公告</h1><span><a href="1713fabugonggao.html"><img src="img/qun04.png" ></a></span>
+		</div>
+		<div class="content group">
+			<div class="box2">
+				<ul>
+					<!-- <li class="on">
+						<a href="1712gonggaoxq.html">
+							<h3 class="line3">比如你是做上门洗车的。这个事情其实大家能做的内容基本上差不多（这里为了说明问题，暂不考虑特殊的洗车内容）。尽管车店去洗</h3>
+							<img src="img/hongbao05.png" >
+							<div class="text">
+								老规矩
+								<p>1554人已读</p>
+								<p>2019年11月27日 13:51</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<h3 class="line3">比如你是做上门洗车的。这个事情其实大家能做的内容基本上差不多（这里为了说明问题，暂不考虑特殊的洗车内容）。尽管车店去洗</h3>
+						<div class="text">
+							老规矩
+							<p>1554人已读</p>
+							<p>2019年11月27日 13:51</p>
+						</div>
+					</li> -->
+				</ul>
+			</div>
+			<!-- <div class="no_list">
+				<img src="img/hongbao10.png" >
+				<p>暂无群公告</p>
+				<p>群公告适用于发布群规，群活动等信息</p>
+				<button type="button">立即创建</button>
+			</div> -->
+		</div>
+	</body>
+	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/dropload.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="dist/dropload.css"/>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var user_token = getUrlParam('token');
+				var groupId = getUrlParam('groupId');
+				
+				// loading(); //加载通用loading层
+				var p = 1;
+				
+				$('.box2').dropload({
+					scrollArea : window,
+					loadDownFn : function(me){
+						//推荐工会memberId:会员ID id:公会ID
+						$aJax.get('/api/groupnotice/getlists',{
+							user_token:user_token,
+							p:p,
+							num:10,
+							groupId:groupId,
+							type:0,
+						}, function(res) {
+							console.log("列表", res)
+							var data = res.data
+							if (5 > data.length) {
+								me.lock();
+								me.noData();
+							}
+							p ++
+							
+							if(data){
+								var html = data.map(function(item){
+									//有图片的时候加上类名on跟显示图片,调整样式!
+									return `<li class="${item.imgPath == ""?'':'on'}">
+												<a href="1718tongzhixq.html?groupId=`+groupId+`&token=`+user_token+`&noticeId=${item.id}">
+													<h3 class="line2">${item.title}</h3>
+													<h4 class="line2">${item.content}</h4>
+													<img style="display:${item.imgPath == ""?'none':'block'}" src="${item.imgPath}" >
+													<div class="text">
+														${item.memberAr.nickname}<p>${item.count_readed}人已读</p>
+														<p style="display:${item.create_time == null?'none':'block'}">`+getMyDate(`${item.create_time}`)+`</p>
+													</div>
+												</a>
+											</li>`
+								}).join('');
+								
+								// 为了测试，延迟1秒加载
+								setTimeout(function(){
+									$('.box2 ul').append(html);
+									// 每次数据加载完，必须重置
+									me.resetload();
+								},1000);
+							}
+							
+							
+						})
+					}
+				});
+				
+			})
+		</script>
+	</html>
+	

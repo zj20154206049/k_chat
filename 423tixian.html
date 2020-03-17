@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>提现</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<body style="background: #F5F6FA;">
+		<div class="content shimingrenzheng">
+			<div class="box2">
+				<label>
+					<span>提现金额</span>
+					<input type="text" name="" id="total" value="" placeholder="请输入提现金额" />
+				</label>
+			</div>
+			<div class="title">
+				扣除¥--服务费(费率0.1%)，最低提现金额为：¥--
+			</div>
+			<div class="box2">
+				<label>
+					<span>银行卡号</span>
+					<input type="text" name="" id="number" value="" placeholder="请输入您的银行卡号" />
+				</label>
+				<label>
+					<span>银行名称</span>
+					<input type="text" name="" id="cardName" value="" placeholder="请输入您的银行名称" />
+				</label>
+				<label>
+					<span>卡户姓名</span>
+					<input type="text" name="" id="name" value="" placeholder="请输入您的卡户姓名" />
+				</label>
+				<label>
+					<span>身份证号</span>
+					<input type="text" name="" id="idCard" value="" placeholder="请输入您的身份证号" />
+				</label>
+			</div>
+			<button type="button" id="btn">申请提现</button>
+		</div>
+	</body>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$('#btn').click(function(){
+				
+				var total = $('#total').val();
+				var number = $('#number').val();
+				var cardName = $('#cardName').val();
+				var name = $('#name').val();
+				var idCard = $('#idCard').val();
+				
+				if(total==''||number==''||cardName==''||name==''||idCard==''){layer.msg('请填写完整内容');return false;}
+				
+				$aJax.post('/api/withdrawal/addwith',{
+					user_token:localStorage.getItem('token'),
+					money:total,
+					bank_number:number,
+					bank_name:cardName,
+					user_name:name,
+					id_card:idCard,
+				},function(res){
+					console.log(res);
+					layer.msg(res.msg)
+					if(res.code=='1'){
+						setTimeout(function(){
+							window.location.href='423tixiancc.html'
+						},1000)
+					}
+				})
+				
+				
+			})
+			
+		})
+	</script>
+</html>

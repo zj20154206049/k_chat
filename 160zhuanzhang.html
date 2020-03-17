@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>转账</title>
+	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div class="header on">
+			<a href="www.fanhui.com" ><img class="go_back" src="img/fanhui.png" ></a><h1>向好友转账</h1><a href="161zhuanzhangjilu.html"><span>转账记录</span></a>
+		</div>
+		<div class="content payment">
+			<div class="box1">
+				<img src="" >
+				<h3>加载中</h3>
+				<p></p>
+			</div>
+			<div class="box2">
+				<div class="title">输入金额</div>
+				<label>
+					<span>￥</span>
+					<input style="font-size: 0.58rem;" type="number" name="" id="number" value="" placeholder="0" />
+				</label>
+				<label>
+					<input type="text" name="" id="text" value="" placeholder="转账留言(选填）" />
+				</label>
+				<button type="button" id="btn">确认转账</button>
+			</div>
+		</div>
+	</body>
+	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			
+			
+			var memberId = getUrlParam('memberId');
+			var token = localStorage.getItem('token')
+			
+			$aJax.get('/api/businesscard/getbusinesscardar',{
+				user_token:token,
+				memberId:memberId,
+			},function(res){
+				console.log(res);
+				$('.box1').html(`<img src="`+res.data.cover+`" ><h3>`+res.data.nickname+`</h3><p>`+res.data.id+`</p>`)
+			})
+			
+			$('#btn').click(function(){
+				var number = $('#number').val();
+				var text = $('#text').val();
+				
+				if(number==''){layer.msg('请输入转账金额');return false;};
+				
+				$aJax.post('/api/member/giveout',{
+					user_token:token,
+					total:number,
+					to_uid:memberId,
+					remarks:text,
+				},function(res){
+					console.log(res);
+					layer.msg(res.msg)
+					if(res.code=='1'){
+						window.location.href = '161zhuanzhangcc.html?id=' + res.data.transfer_id + '&total=' + number
+					}
+					
+				})
+				
+			})
+			
+		})
+	</script>
+</html>
