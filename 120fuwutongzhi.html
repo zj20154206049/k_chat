@@ -54,60 +54,6 @@
 		$(document).ready(function() {
 			var user_token = localStorage.getItem('token')
 			loading(); //加载通用loading层
-			$aJax.get('/api/withdrawal/addwith', {
-				
-			}, function(res) {
-				console.log(''zj,res);
-				// var unixTimestamp = new Date(res.data[0].create_time * 1000);
-				// var update = new Date(res.data[0].update_time * 1000);
-				// Date.prototype.toLocaleString = function() {
-				// 	return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate() + "-" + this.getHours() + ":" +
-				// 		this.getMinutes() + ":" + this.getSeconds();
-				// };
-				// commonTime = unixTimestamp.toLocaleString();
-				// updatetime = update.toLocaleString();
-				// var box2Html = ''
-				if (res.data) {
-			
-		// 			box2Html =
-		// 				`	<div class="content notice">
-		// 	<div class="box1" style="display: none;"> 
-		// 		<ul>
-		// 				<li>
-		// 				<div class="time">2019-12-02 14:56</div>
-		// 				<div class="text">
-		// 					<div class="title">发起提现</div>
-		// 					<h3>充值金额</h3>
-		// 					<p><span>￥</span>68.25</p>
-		// 					<dl>
-		// 						<dt>提现手续费</dt>
-		// 						<dd>3%</dd>
-		// 					</dl>
-		// 					<dl>
-		// 						<dt>提现时间</dt>
-		// 						<dd>2019-12-02 15:25:56</dd>
-		// 					</dl>
-		// 					<dl>
-		// 						<dt>提现账户</dt>
-		// 						<dd>建设银行 6217 0035 3005 698</dd>
-		// 					</dl>
-		// 				</div>
-		// 			</li> 
-		// 		</ul>
-		// 	</div>
-		// </div>`
-		// 			$('.box1').html(box2Html);
-		// 			$('.box1').css('display', 'block')
-			
-				}
-			})
-			
-			
-			
-			
-			
-			
-			
 			$aJax.get('/api/member/financelog', {
 				user_token: user_token,
 				type: 5,
