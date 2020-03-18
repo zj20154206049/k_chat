@@ -76,7 +76,6 @@
 				console.log('zj',res.data); 
 				var box2Html = ''
 				if (res.data) {
-					let str = ['未知','申请入群','同意','拒绝','邀请入群','创建群','被移出群','添加管理员','撤销管理员','退出群聊','解散群','转让群','免验证直接进群']
 					for (let i = 0; i < res.data.length; i++) {
 						
 					box2Html +=
@@ -86,7 +85,7 @@
 										<a href="113qunyanzhengxq.html?id=`+res.data[i].id + `&path= `+res.data[i].triggerMemberAr.coverPath + ` &name= `+res.data[i].triggerMemberAr.nickname + ` &info= `+res.data[i].viewActionCn1 + `">
 												<img src="` +res.data[i].triggerMemberAr.coverPath+`">
 												<h3>`+res.data[i].groupAr.title+`</h3>
-												<div class="` +(res.data[i].viewRightType == "text" ? "on" : "out" )  + `">`+str[(res.data[i].type)] + `</div>
+												<div class="` +(res.data[i].viewRightType == "text" ? "on" : "out" )  + `">`+res.data[i].viewRightCn + `</div>
 												<div class="hidden">`+res.data[i].viewActionCn1+`</div>										
 												<p>处理人：`+res.data[i].dealMemberAr+`</p>
 												<p>群ID:`+res.data[i].groupAr.id+`</p>				
