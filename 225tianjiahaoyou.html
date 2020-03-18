@@ -44,10 +44,17 @@
  				$("#head").attr("src",data.cover);
  				localStorage.setItem("data",JSON.stringify(data))
 			} else {
-				let data = JSON.parse(localStorage.getItem("data"));
+				data = JSON.parse(localStorage.getItem("data"));
 				console.log(data)
 				$('#name').html(data.nickname);
  				$("#head").attr("src",data.cover);
+			}
+			
+			let groupId = getUrlParam("groupId");
+			let title = decode(getUrlParam("title"));
+			if(groupId){
+				$('#fenzu').html(title);
+				$("#fenzu").attr("data-id",groupId);
 			}
 			
 			if(localStorage.getItem('text')){
@@ -62,15 +69,16 @@
 			
 			$('.btn3').click(function(){
 				var text = $('#text').val();
+				var groupId = $('#fenzu').attr("data-id");
 				$aJax.post('/api/buddy/applytofriend',{
 					user_token:localStorage.getItem('token'),
-					to_uid:memberId,
+					to_uid:data.id,
 					content:text,
-					from_set_group_id:group_id||1,
+					from_set_group_id:groupId,
 					from_set_remark:'',
 					source:'0',
-					source_group_id:source_group_id,
-					source_uid:source_uid,
+					source_group_id:0,
+					source_uid:0,
 					
 				},function(res){
 					console.log(res);
