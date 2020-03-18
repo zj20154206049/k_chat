@@ -36,7 +36,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
- 			localStorage.setItem("token",'42f5386d54b5bf2f12f17ed32a40e165164')
 			let data = JSON.parse(decode(getUrlParam('data')));
 			console.log(data)
 			if(data){
@@ -76,7 +75,7 @@
 					content:text,
 					from_set_group_id:groupId,
 					from_set_remark:'',
-					source:'0',
+					source:0,
 					source_group_id:0,
 					source_uid:0,
 					
@@ -84,9 +83,9 @@
 					console.log(res);
 					layer.msg(res.msg);
 					if(res.code=='1'){
-						setTimeout(function(){
-							window.location.href = '210mingpian.html'
-						},800)
+//						setTimeout(function(){
+//							window.location.href = '210mingpian.html'
+//						},800)
 					}
 					
 				})
