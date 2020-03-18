@@ -31,34 +31,35 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var memberId = getUrlParam('memberId');
-			var source_group_id = getUrlParam('source_group_id') || 0;
-			var source_uid = getUrlParam('source_uid') || 0;
-			var source = getUrlParam('source') || 0;
 			
+			let data = {};
+			let groupId = 0;
+			let title = '';
 			$aJax.get('/api/buddygroup/getgrouplists',{
 				user_token:localStorage.getItem('token'),
 			},function(res){
 				console.log(res);
-				var data = res.data
 				if(data){
+					data = res.data;
+					groupId = data[0].id;
+					title = data[0].title;
 					var html = data.map(function(item){
-						return `<li data-id="${item.id}">${item.title}</li>`
+						return `<li data-id="${item.id}" data-title="${item.title}">${item.title}</li>`
 					}).join('');
 					$('.list ul').html(html);
 					$('.list ul li').eq(0).addClass('on');
-					source_group_id =$('.list ul li').eq(0).attr('data-id')
 				}
 			})
 			
 			$(document).on('click','.list ul li',function(){
-				source_group_id =$(this).attr('data-id')
+				groupId = $(this).attr('data-id')
+				title = $(this).attr('data-title')
 				$('.list ul li').removeClass('on');
 				$(this).addClass('on');
 			})
 			
 			$(document).on('click','.reture,.go_back',function(){
-				window.location.href = '225tianjiahaoyou.html?memberId=' + memberId + '&source_group_id=' + source_group_id + '&source_uid=' + source_uid + '&source=' + source
+				window.location.href = '225tianjiahaoyou.html?memberId='
 			})
 			// 
 			

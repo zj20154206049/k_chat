@@ -49,6 +49,8 @@
 				console.log('zj',res.data); 
 				var box2Html = ''
 				if (res.data) {
+					
+					let lis = ['1','2','3','4','5','6','7','8','9','10','11','12','13'];
 					for (let i = 0; i < res.data.length; i++) {
 						console.log(res.data[i])
 					box2Html +=
@@ -60,7 +62,7 @@
 												<h3>`+res.data[i].groupAr.title+`</h3>
 												<p>处理人：`+res.data[i].dealMemberAr+`</p>
 												<p>群ID:`+res.data[i].groupAr.id+`</p>
-												<button type="button" class="on">`+(res.data[i].type == 10 ? '已解散' : (res.data[i].type == 3 ? '已拒绝' : '其他')) + `</button>,
+												<button type="button" class="on">`+lis[(res.data[i].type)] + `</button>,
 										</a>
 										</li>
 										</ul>								

@@ -35,41 +35,30 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+ 			localStorage.setItem("token",'42f5386d54b5bf2f12f17ed32a40e165164')
 			let data = JSON.parse(decode(getUrlParam('data')));
 			console.log(data)
-			$('#name').html(data.nickname);
- 			$("#head").attr("src",data.cover);
-			
-			
-			
-			
-			
-			var memberId = getUrlParam('memberId');
-			var group_id = getUrlParam('group_id'); 
-			var source_group_id = getUrlParam('source_group_id');
-			var source_uid = getUrlParam('source_uid');
-			var source = getUrlParam('source');
+			if(data){
+				$('#name').html(data.nickname);
+ 				$("#head").attr("src",data.cover);
+ 				localStorage.setItem("data",JSON.stringify(data))
+			} else {
+				let data = JSON.parse(localStorage.getItem("data"));
+				console.log(data)
+				$('#name').html(data.nickname);
+ 				$("#head").attr("src",data.cover);
+			}
 			
 			if(localStorage.getItem('text')){
 				$('#text').val(localStorage.getItem('text'))
 			}
-			
+			//选择分组
 			$('.go_xuanze').click(function(){
 				var text = $('#text').val();
 				localStorage.setItem('text',text)
-				window.location.href = '226xuanzefenzu.html?memberId=' + memberId + '&source_group_id=' + source_group_id + '&source_uid=' + source_uid + '&source=' + source
+				window.location.href = '226xuanzefenzu.html'
 			})
-			
-//			$aJax.get('/api/businesscard/getbusinesscardar',{
-//				user_token:localStorage.getItem('token'),
-//				memberId:memberId
-//			},function(res){
-//				console.log("res",res);
-//				if(res.data){
-//					$('.info').html(`<img src="`+res.data.cover+`" ><h3>`+res.data.nickname+`</h3>`);
-//				}
-//				
-//			})
 			
 			$('.btn3').click(function(){
 				var text = $('#text').val();
