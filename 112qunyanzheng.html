@@ -55,26 +55,30 @@
 						`<div class="box2">
 									<ul>
 										<li>
-											<a href="113qunyanzhengxq.html">
+										<a href="113qunyanzhengxq.html">
 												<img src="` +res.data[i].triggerMemberAr.coverPath+`">
 												<h3>`+res.data[i].groupAr.title+`</h3>
-												<p>处理人：小光</p>
-												<button type="button" class="on">`+res.data[i].type + `</button>
-											</a>
+												<p>处理人：`+res.data[i].dealMemberAr+`</p>
+												<p>群ID:`+res.data[i].groupAr.id+`</p>
+												<button type="button" class="on">`+(res.data[i].type == 10 ? '已解散' : (res.data[i].type == 3 ? '已拒绝' : '其他')) + `</button>,
+										</a>
 										</li>
 										</ul>								
 								</div>`
+								// if(res.data[i].type == 10){
+								// 	<a href="113qunyanzhengxq.html"></a>
+								// }
 								
 					$('.box2').html(box2Html);
 					$('.box2').css('display', 'block')
-
+<!-- 
 					// <li>
 					// 	<img src="img/erwm01.png" >
 					// 	<h3>dam大魔王</h3>
 					// 	<p>你好啊</p>
 					// 	<h4>来源：账号查找 <span>2019-12-01 18:23:21</span></h4>
 					// 	<button type="button">已拒绝</button>
-					// </li>
+					// </li> -->
 					}
 				}
 			})

@@ -1188,8 +1188,9 @@
 	line-height:0.24rem;
 }
 .haoyouyz .box2{
-	padding: 0 0.3rem;
+	padding: 0 0.2rem;
 	background: #fff;
+	border-bottom: 1px #f5f6f9 solid;
 }
 .haoyouyz .box2 ul li{
 	padding: 0.3rem 0 0.2rem;
