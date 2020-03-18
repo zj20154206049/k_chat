@@ -56,6 +56,17 @@ if(token){
 	localStorage.setItem('token',token);
 }
 
+//中文编码
+function encode(dat) {
+	
+	return encodeURI(encodeURI(dat)); 
+}
+
+//中文解码
+function decode(dat) {
+	
+	return decodeURI(decodeURI(dat)); 
+}
 
 /////////////获取链接上面的参数
 function getUrlParam(name) {
