@@ -3,6 +3,33 @@
 	<head> 
 		<meta charset="utf-8">
 		<title>群验证</title>
+		<style>
+			.on{
+				font-size: 0.24rem;
+				font-family: PingFang SC;
+				font-weight: 500;
+				color: rgba(163,166,176,1);
+				float: right;
+			}
+			.out{
+				font-weight: 500;
+				color: #333;
+				float: right;
+				border-radius: 16px;
+				background: rgba(163, 166, 176, 0.18);
+				padding: 0.1rem 0.2rem;
+			}
+			.hidden{
+				    max-width: 3rem;
+				    font-size: 0.24rem;
+				    font-family: PingFang SC;
+				    font-weight: 500;
+				    color: rgba(163,166,176,1);
+					overflow: hidden;
+					text-overflow:ellipsis;
+					white-space: nowrap;
+			}
+		</style>
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
@@ -56,16 +83,18 @@
 						`<div class="box2">
 									<ul>
 										<li>
-										<a href="113qunyanzhengxq.html?id=` + res.data[i].id +`">
+										<a href="113qunyanzhengxq.html?id=`+res.data[i].id + `&path= `+res.data[i].triggerMemberAr.coverPath + ` &name= `+res.data[i].triggerMemberAr.nickname + ` &info= `+res.data[i].viewActionCn1 + `">
 												<img src="` +res.data[i].triggerMemberAr.coverPath+`">
 												<h3>`+res.data[i].groupAr.title+`</h3>
+												<div class="` +(res.data[i].viewRightType == "text" ? "on" : "out" )  + `">`+str[(res.data[i].type)] + `</div>
+												<div class="hidden">`+res.data[i].viewActionCn1+`</div>										
 												<p>处理人：`+res.data[i].dealMemberAr+`</p>
-												<p>群ID:`+res.data[i].groupAr.id+`</p>
-												<button type="button" class="on">`+str[(res.data[i].type)] + `</button>,
+												<p>群ID:`+res.data[i].groupAr.id+`</p>				
 												</a>
 										</li>
 										</ul>								
 								</div>`
+								 <!-- <button type="button" class="on">`+str[(res.data[i].type)] + `</button>, -->
 								// if(res.data[i].type == 10){
 								// 	<a href="113qunyanzhengxq.html"></a>
 								// }

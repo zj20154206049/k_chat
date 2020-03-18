@@ -14,12 +14,12 @@
 		<div class="content apply">
 			<div class="box1">
 				<div class="img">
-					<img src="img/erwm01.png" >
-					<h3>dam大魔王</h3>
+					<img id="head" >
+					<h3 id="name">dam大魔王</h3>
 				</div>
 				<dl>
 					<dt>申请加入</dt>
-					<dd>ps交流群</dd>
+					<dd id="join">ps交流群</dd>
 				</dl>
 				<dl>
 					<dt>验证信息：</dt>
@@ -39,7 +39,18 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			console.log(getUrlParam('id'));
+			let path = getUrlParam('path');
+			let name = getUrlParam('name');
+			// let info = getUrlParam('info');
+			// let infoen = encode(JSON.stringify(info));
+			// console.log(getUrlParam('id'));
+			// console.log(getUrlParam('name'));
+			// console.log(getUrlParam('hh'));
+			$("#head").attr("src",path);
+			$("#name").html(name);
+			// $("#join").html(infoen);
+			
+			
 			
 		})
 	</script>

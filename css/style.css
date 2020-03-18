@@ -1210,13 +1210,15 @@
 	margin-right: 0.24rem;
 }
 .haoyouyz .box2 ul li h3{
+	max-width: 4rem;
 	margin-top: 0.1rem;
 	font-size:0.34rem;
 	font-family:PingFang SC;
 	font-weight:500;
 	color:rgba(4,8,25,1);
-	line-height:0.34rem;
-	padding-left: 1.25rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .haoyouyz .box2 ul li p{
 	max-width: 3rem;
