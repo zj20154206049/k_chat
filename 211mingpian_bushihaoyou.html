@@ -14,12 +14,12 @@
 		<div class="content apply">
 			<div class="box1">
 				<div class="img">
-					<img src="img/erwm01.png" >
-					<h3>dam大魔王</h3>
+					<img id="head" >
+					<h3 id="name">dam大魔王</h3>
 				</div>
 				<dl>
 					<dt>ID号</dt>
-					<dd>916906575</dd>
+					<dd id="num">916906575</dd>
 				</dl>
 			</div>
 			<div class="box1">
@@ -32,12 +32,24 @@
 			
 		</div>
 	</body>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.btn4').click(function(){
-				window.location.href = '225tianjiahaoyou.html'
-			})
+		
+		$(function () {
+			let data = JSON.parse(decode(getUrlParam('data')));
+ 			$('#name').html(data.nickname);
+ 			$('#num').html(data.id);
+ 			$("#head").attr("src",data.cover);
+ 			$(document).ready(function() {
+				$('.btn4').click(function(){
+					window.location.href = '225tianjiahaoyou.html?data=' + encode(JSON.stringify(data))
+				})
 			
 		})
+		console.log(data)
+		});
+		
+		
 	</script>
 </html>

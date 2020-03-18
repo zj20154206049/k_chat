@@ -14,8 +14,8 @@
 		<div class="content apply">
 			<div class="box1" style="margin-bottom: 0;">
 				<div class="img info" style="border-bottom: none;">
-					<img src="" >
-					<h3>加载中</h3>
+					<img id="head">
+					<h3 id="name">加载中</h3>
 				</div>
 			</div>
 			<div class="box2">
@@ -35,6 +35,15 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			let data = JSON.parse(decode(getUrlParam('data')));
+			console.log(data)
+			$('#name').html(data.nickname);
+ 			$("#head").attr("src",data.cover);
+			
+			
+			
+			
+			
 			var memberId = getUrlParam('memberId');
 			var group_id = getUrlParam('group_id'); 
 			var source_group_id = getUrlParam('source_group_id');
@@ -51,16 +60,16 @@
 				window.location.href = '226xuanzefenzu.html?memberId=' + memberId + '&source_group_id=' + source_group_id + '&source_uid=' + source_uid + '&source=' + source
 			})
 			
-			$aJax.get('/api/businesscard/getbusinesscardar',{
-				user_token:localStorage.getItem('token'),
-				memberId:memberId
-			},function(res){
-				console.log("res",res);
-				if(res.data){
-					$('.info').html(`<img src="`+res.data.cover+`" ><h3>`+res.data.nickname+`</h3>`);
-				}
-				
-			})
+//			$aJax.get('/api/businesscard/getbusinesscardar',{
+//				user_token:localStorage.getItem('token'),
+//				memberId:memberId
+//			},function(res){
+//				console.log("res",res);
+//				if(res.data){
+//					$('.info').html(`<img src="`+res.data.cover+`" ><h3>`+res.data.nickname+`</h3>`);
+//				}
+//				
+//			})
 			
 			$('.btn3').click(function(){
 				var text = $('#text').val();
