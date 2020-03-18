@@ -1245,7 +1245,6 @@
 	top: 0.54rem;
 	right: 0;
 	border: none;
-	width:1.02rem;
 	height:0.56rem;
 	background:transparent;
 	border-radius:0.28rem;
@@ -1253,6 +1252,7 @@
 	font-family:PingFang SC;
 	font-weight:500;
 	color:#A3A6B0;
+	padding: 0 0.2rem;
 }
 .haoyouyz .box2 ul li button.on{
 	background:rgba(235,236,244,1);

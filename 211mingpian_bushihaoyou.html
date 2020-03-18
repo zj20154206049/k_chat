@@ -41,6 +41,7 @@
  			$('#name').html(data.nickname);
  			$('#num').html(data.id);
  			$("#head").attr("src",data.cover);
+			console.log(data)
  			$(document).ready(function() {
 				$('.btn4').click(function(){
 					window.location.href = '225tianjiahaoyou.html?data=' + encode(JSON.stringify(data))
