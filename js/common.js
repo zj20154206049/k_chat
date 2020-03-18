@@ -56,7 +56,7 @@ if(token){
 	localStorage.setItem('token',token);
 }
 
-//中文编码
+//中文编码 
 function encode(dat) {
 	
 	return encodeURI(encodeURI(dat)); 
