@@ -103,13 +103,11 @@
 
 			<div class="list">
 				<div class="flex" id="upload">
-
 					<div class="name">头像</div>
-					<label for="fileinput" id="tip" style="width:75px;display:inline-block;">
+					<label for="fileinput" id="tip" style="display:inline-block;">
 						<img src="img/chongzhi03.png" class="nick" id="head" />
 						<input type="file" id="fileinput" style="display: none;" />
 					</label>
-
 				</div>
 				<a href="442updatenick.html">
 					<div class="flex">
@@ -164,8 +162,11 @@
 							field: "cover",
 							val: res.data.id
 						}, function(res) {
-							if (res.data) {}
-						})
+							console.log(res)
+							history.go(0)
+							// $('#head').attr("src", yonghu.coverPath)
+						});
+						
 
 					},
 					error: function(err) {

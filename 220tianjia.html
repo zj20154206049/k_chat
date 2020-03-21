@@ -30,6 +30,18 @@
 					<span>扫码添加</span>
 				</label>
 			</div>
+			<!-- 加群聊 -->
+			<div class="box2" style="display: none;">
+				<label>
+					<img src="img/tianjia02.png" >
+					<input type="text" name="sousuo" id="sousuo" placeholder="搜索好友ID" />
+				</label>
+				<label class="on">
+					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
+					<span>扫码添加胜多负少的</span>
+				</label>
+			</div>
+			
 		</div>
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
@@ -58,7 +70,13 @@
 						}
 					})
 				}
-			})
+			});
+			$(document).on('click','.tab_top ul li',function(){
+				$('.tab_top ul li').removeClass('on');
+				$(this).addClass('on');
+				// $(.box2).css("display","block");
+				// $(.box1).css("display","none");
+			})	
 		});
 	</script>
 
