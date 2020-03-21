@@ -5,7 +5,7 @@
 		<title>我的</title>
 		<style>
 			.inline {
-				float: right;
+				float: right; 
 				color: #4FA2F7;
 			}
 
@@ -176,7 +176,7 @@
 		console.log(yonghu)
 		$(document).ready(function() {
 
-			$('.box1').html(`<a href="441updateperson.html"><img class="avatar" src="` + yonghu.coverPath + `" ></a>
+			$('.box1').html(`<a href="441updateperson.html?name=`+yonghu.nickname + ` &path= `+yonghu.coverPath + ` &num= `+yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
 								<h3>` + yonghu.nickname +
 				`</h3>
 								<p></p>

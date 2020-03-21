@@ -15,7 +15,7 @@
 			}
 
 			.list {
-				margin-top: 1.4rem;
+				margin-top: 1.4rem; 
 				background: #FFFFFF;
 			}
 
@@ -81,12 +81,19 @@
 			</div>
 			<div class="list">
 				<div class="flex">
-					<input value="dam大魔王" />
+					<input value="dam大魔王" id="name"/>
 					<!-- <div class="username"></div> -->
 				</div>
 				<a href="441updateperson.html"><button type="button" class="btn4">保存</button></a>
 			</div>
 		</div>
 	</body>
-	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {	
+			let name = getUrlParam('name');
+			console.log('name')
+			$("#name").attr("value","name");	
+		})
+	</script>
 </html>

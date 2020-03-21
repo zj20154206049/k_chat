@@ -31,7 +31,7 @@
 			.flex:nth-child(3) {
 				border-bottom: none;
 			}
-
+ 
 			.name {
 				flex: 1;
 				font-size: 0.15rem;
@@ -102,24 +102,34 @@
 			<div class="list">
 				<div class="flex">
 					<div class="name">头像</div>
-					<img src="img/chongzhi03.png" class="nick" />
+					<img src="img/chongzhi03.png" class="nick" id="head"/>
 					<img src="img/qun06.png" class="next" />
 				</div>
 				<a href="442updatenick.html">
 				<div class="flex">
 					<div class="name">昵称</div>
-					<div class="username">dam大魔王</div>
+					<div class="username" id="name">dam大魔王</div>
 					<img src="img/qun06.png" class="next" />
 				</div>
 				</a>
 				<div class="flex">
 					<div class="name">ID</div>
-					<div class="id">4545454542</div>
+					<div class="id" id="num">4545454542</div>
 				</div>
 
 				<a href="400wode.html"><button type="button" class="btn4">保存</button></a>
 			</div>
 		</div>
 	</body>
-	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			let path = getUrlParam('path');
+			let name = getUrlParam('name');
+			let num = getUrlParam('num');
+			$("#head").attr("src",path);
+			$("#name").html(name);
+			$("#num").html(num);
+		})
+	</script>
 </html>
