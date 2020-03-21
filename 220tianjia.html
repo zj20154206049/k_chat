@@ -16,8 +16,8 @@
 		<div class="content search">
 			<div class="tab_top">
 				<ul>
-					<li class="on">加好友</li>
-					<li>加群聊</li>
+					<li class="on" id="frend">加好友</li>
+					<li id="group">加群聊</li>
 				</ul>
 			</div>
 			<div class="box1">
@@ -25,27 +25,29 @@
 					<img src="img/tianjia02.png" >
 					<input type="text" name="sousuo" id="sousuo" placeholder="搜索好友ID" />
 				</label>
-				<label class="on">
+				<a href="http://sao315.com/w/api/saoyisao"><label class="on">
 					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
 					<span>扫码添加</span>
-				</label>
+				</label></a>
 			</div>
 			<!-- 加群聊 -->
 			<div class="box2" style="display: none;">
 				<label>
 					<img src="img/tianjia02.png" >
-					<input type="text" name="sousuo" id="sousuo" placeholder="搜索好友ID" />
+					<input type="text" name="sousuo" id="sousuo" placeholder="搜索群聊ID" />
 				</label>
-				<label class="on">
+				<a href="http://sao315.com/w/api/saoyisao"><label class="on">
 					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
-					<span>扫码添加胜多负少的</span>
-				</label>
+					<span>扫码添加</span>
+				</label></a>
 			</div>
 			
 		</div>
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		if (location.href.indexOf("qrresult=")>-1)
+		    alert(location.href.split("qrresult=")[1]);
 		$(function() {
 			$('#sousuo').bind('keypress', function(event) {
 				if(event.keyCode == "13") {
@@ -71,11 +73,17 @@
 					})
 				}
 			});
-			$(document).on('click','.tab_top ul li',function(){
+			$(document).on('click','#frend',function(){
 				$('.tab_top ul li').removeClass('on');
 				$(this).addClass('on');
-				// $(.box2).css("display","block");
-				// $(.box1).css("display","none");
+				$(".box1").show();
+				$(".box2").hide();
+			})	
+			$(document).on('click','#group',function(){
+				$('.tab_top ul li').removeClass('on');
+				$(this).addClass('on');
+				$(".box2").show();
+				$(".box1").hide();
 			})	
 		});
 	</script>

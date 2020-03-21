@@ -2315,7 +2315,23 @@
 	box-sizing: border-box;
 	position: relative;
 }
+.search .box2 label{
+	display: block;
+	margin: 0.2rem 0 0;
+	background: #fff;
+	height: 1rem;
+	display: flex;
+	align-items: center;
+	padding: 0 0.3rem;
+	box-sizing: border-box;
+	position: relative;
+}
 .search .box1 label img{
+	float: left;
+	width: 0.28rem;
+	height: 0.28rem;
+}
+.search .box2 label img{
 	float: left;
 	width: 0.28rem;
 	height: 0.28rem;
@@ -2327,7 +2343,19 @@
 	margin: 0 0 0 0.15rem;
 	font-size:0.3rem;
 }
+.search .box2 label input{
+	width: 80%;
+	height: 1rem;
+	border: none;
+	margin: 0 0 0 0.15rem;
+	font-size:0.3rem;
+}
 .search .box1 label span{
+	line-height: 1rem;
+	margin: 0 0 0 0.15rem;
+	font-size: 0.3rem;
+}
+.search .box2 label span{
 	line-height: 1rem;
 	margin: 0 0 0 0.15rem;
 	font-size: 0.3rem;
