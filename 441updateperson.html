@@ -100,10 +100,13 @@
 			</div>
 
 			<div class="list">
-				<div class="flex">
+				<div class="flex" id="upload" >
+					
 					<div class="name">头像</div>
 					<img src="img/chongzhi03.png" class="nick" id="head"/>
+					<input type="file" style="visibility: hidden" />
 					<img src="img/qun06.png" class="next" />
+					
 				</div>
 				<a href="442updatenick.html">
 				<div class="flex">
@@ -123,13 +126,31 @@
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+		var yonghu = yonghu();
+		console.log('zj',yonghu)
+		$(document).ready(function() {					
 			let path = getUrlParam('path');
 			let name = getUrlParam('name');
 			let num = getUrlParam('num');
 			$("#head").attr("src",path);
 			$("#name").html(name);
 			$("#num").html(num);
+			$('#name').html(yonghu.nickname)
+			$('#head').attr("src",yonghu.coverPath)
+			$('#num').html(yonghu.id)	
+				$("#upload").click(function() {
+					$aJax.get('/api/upload/pictures', {
+						user_token: user_token,
+						// file:1
+					}, function(res) {
+						console.log('zj', res.data);
+				
+						if (res.data) {
+				
+						}
+					})
+				});
+				
 		})
 	</script>
 </html>

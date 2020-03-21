@@ -31,6 +31,7 @@
 				font-size: 0.15rem;
 				color: #878B97;
 				border: none;
+				width: 100%;
 			}
 
 			.next {
@@ -85,7 +86,7 @@
 					<input value="dam大魔王" id="name" />
 					<!-- <div class="username"></div> -->
 				</div>
-				<button type="button" class="btn4" id="sub">保存</button>
+				<a href="441updateperson.html"><button type="button" class="btn4" id="sub">保存</button></a>
 			</div>
 		</div>
 	</body>
@@ -96,9 +97,9 @@
 			$("#name").attr("value", info.nickname);
 			$("#sub").click(function() {
 				$aJax.get('/api/member/edit', {
-					// user_token: user_token,
-					field: info.nickname,
-					val: ""
+					user_token: user_token,
+					field: "nickname",
+					val: $("#name").val()
 				}, function(res) {
 					console.log('zj', res.data);
 
