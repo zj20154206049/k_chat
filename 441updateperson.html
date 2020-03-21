@@ -148,18 +148,6 @@
 				var formData = new FormData()
 				formData.append('file', file);
 				formData.append('user_token', user_token);
-				// 				$aJax.get('/api/upload/pictures', {
-				// 					user_token: user_token,
-				// 					 file:formData,
-				// 					 processData: false,
-				// 				}, function(res) {
-				// 					console.log('zj', res.data);
-				// 
-				// 					if(res.data) {
-				// 
-				// 					}
-				// 				})
-				
 				$.ajax({
 					url: ajaxUrl + '/api/upload/pictures',
 					data: formData,
@@ -171,25 +159,21 @@
 						//						loadingInstance = layer.load()    
 					},
 					success: function(res) {
-                     console.log('sj',res)
-                      // sj = res.data.id
+						$aJax.get('/api/member/edit', {
+							user_token: user_token,
+							field: "cover",
+							val: res.data.id
+						}, function(res) {
+							if (res.data) {}
+						})
+
 					},
 					error: function(err) {
 
 					}
-				})			
+				})
 			});
-			$aJax.get('/api/member/edit', {
-				user_token: user_token,
-				// field: ,
-				// val: 
-			}, function(res) {
-				console.log('zj', res.data);
-			
-				if (res.data) {
-			
-				}
-			})
+
 
 		})
 	</script>
