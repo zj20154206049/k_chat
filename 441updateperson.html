@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>个人资料</title>
@@ -13,12 +14,12 @@
 				/* 		width:0.19rem;
 				height:0.34rem; */
 			}
-
+			
 			.list {
 				margin-top: 1.4rem;
 				background: #FFFFFF;
 			}
-
+			
 			.flex {
 				display: flex;
 				flex-direction: row;
@@ -27,40 +28,40 @@
 				padding: 0.23rem 0;
 				border-bottom: 0.02rem #eee solid;
 			}
-
+			
 			.flex:nth-child(3) {
 				border-bottom: none;
 			}
- 
+			
 			.name {
 				flex: 1;
 				font-size: 0.15rem;
 				color: #333333;
 			}
-
+			
 			.username {
 				font-size: 0.15rem;
 				color: #878B97;
 				margin-right: 0.1rem;
 			}
-
+			
 			.nick {
 				width: 0.7rem;
 				height: 0.7rem;
 				margin-right: 0.09rem;
 				border-radius: 50%;
 			}
-
+			
 			.next {
 				width: 6.05pt;
 				height: 10pt;
 			}
-
+			
 			.id {
 				font-size: 0.15rem;
 				color: #000000;
 			}
-
+			
 			button {
 				display: block;
 				width: 6.25rem;
@@ -74,7 +75,7 @@
 				color: rgba(34, 34, 34, 1);
 				margin: 0 auto 0.2rem;
 			}
-
+			
 			.btn4 {
 				background: #4FA2F7;
 				color: #fff;
@@ -91,6 +92,7 @@
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+
 	<body style="background: #F5F6FA;">
 		<div>
 			<div class="header" style="background: #fff; ">
@@ -100,20 +102,21 @@
 			</div>
 
 			<div class="list">
-				<div class="flex" id="upload" >
-					
+				<div class="flex" id="upload">
+
 					<div class="name">头像</div>
-					<img src="img/chongzhi03.png" class="nick" id="head"/>
-					<input type="file" style="visibility: hidden" />
-					<img src="img/qun06.png" class="next" />
-					
+					<label for="fileinput" id="tip" style="width:75px;display:inline-block;">
+						<img src="img/chongzhi03.png" class="nick" id="head" />
+						<input type="file" id="fileinput" style="display: none;" />
+					</label>
+
 				</div>
 				<a href="442updatenick.html">
-				<div class="flex">
-					<div class="name">昵称</div>
-					<div class="username" id="name">dam大魔王</div>
-					<img src="img/qun06.png" class="next" />
-				</div>
+					<div class="flex">
+						<div class="name">昵称</div>
+						<div class="username" id="name">dam大魔王</div>
+						<img src="img/qun06.png" class="next" />
+					</div>
 				</a>
 				<div class="flex">
 					<div class="name">ID</div>
@@ -127,30 +130,51 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		var yonghu = yonghu();
-		console.log('zj',yonghu)
-		$(document).ready(function() {					
+		console.log('zj', yonghu)
+		$(document).ready(function() {
 			let path = getUrlParam('path');
 			let name = getUrlParam('name');
 			let num = getUrlParam('num');
-			$("#head").attr("src",path);
+			$("#head").attr("src", path);
 			$("#name").html(name);
 			$("#num").html(num);
 			$('#name').html(yonghu.nickname)
-			$('#head').attr("src",yonghu.coverPath)
-			$('#num').html(yonghu.id)	
-				$("#upload").click(function() {
-					$aJax.get('/api/upload/pictures', {
-						user_token: user_token,
-						// file:1
-					}, function(res) {
-						console.log('zj', res.data);
-				
-						if (res.data) {
-				
-						}
-					})
-				});
-				
+			$('#head').attr("src", yonghu.coverPath)
+			$('#num').html(yonghu.id)
+
+			$("#fileinput").change(function(e) {
+				var file = e.target.files[0];
+				//				$aJax.get('/api/upload/pictures', {
+				//					user_token: user_token,
+				//					 file:file
+				//				}, function(res) {
+				//					console.log('zj', res.data);
+				//
+				//					if(res.data) {
+				//
+				//					}
+				//				})
+				var formData = new FormData()  
+				formData.append('file', file) ; 
+				$.ajax({
+					url: ajaxUrl + '/api/upload/pictures',
+					    data: formData,
+					    processData: false,
+					contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					    type: 'POST',
+					    beforeSend: function() {      
+//						loadingInstance = layer.load()    
+					},
+					success: function(res) {
+						
+					},
+					error: function(err) {      
+						
+					}  
+				})
+			})
+
 		})
 	</script>
+
 </html>
