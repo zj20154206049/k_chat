@@ -15,7 +15,7 @@
 			}
 
 			.list {
-				margin-top: 1.4rem; 
+				margin-top: 1.4rem;
 				background: #FFFFFF;
 			}
 
@@ -26,7 +26,8 @@
 				margin: 0 0.2rem;
 				padding: 0.23rem 0;
 			}
-			.flex input{
+
+			.flex input {
 				font-size: 0.15rem;
 				color: #878B97;
 				border: none;
@@ -81,19 +82,33 @@
 			</div>
 			<div class="list">
 				<div class="flex">
-					<input value="dam大魔王" id="name"/>
+					<input value="dam大魔王" id="name" />
 					<!-- <div class="username"></div> -->
 				</div>
-				<a href="441updateperson.html"><button type="button" class="btn4">保存</button></a>
+				<button type="button" class="btn4" id="sub">保存</button>
 			</div>
 		</div>
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {	
-			let name = getUrlParam('name');
-			console.log(name)
-			$("#name").attr("value","name");
+		$(document).ready(function() {
+			let info = JSON.parse(localStorage.getItem("userInf"))
+			$("#name").attr("value", info.nickname);
+			$("#sub").click(function() {
+				$aJax.get('/api/member/edit', {
+					// user_token: user_token,
+					field: info.nickname,
+					val: ""
+				}, function(res) {
+					console.log('zj', res.data);
+
+					if (res.data) {
+
+					}
+				})
+			});
+
+
 		})
 		console.log(JSON.parse(localStorage.getItem("userInf")))
 	</script>
