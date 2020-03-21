@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>我的</title>
 		<style>
 			.inline {
-				float: right; 
+				float: right;
 				color: #4FA2F7;
 			}
-
+			
 			.img_vip {
 				display: none;
 				position: absolute;
@@ -21,7 +22,7 @@
 				height: 4rem;
 				z-index: 9999;
 			}
-
+			
 			.img_close {
 				display: none;
 				position: absolute;
@@ -34,7 +35,7 @@
 				height: 0.6rem;
 				z-index: 9999;
 			}
-
+			
 			.layer {
 				display: none;
 				position: fixed;
@@ -45,9 +46,8 @@
 				background-color: black;
 				z-index: 999;
 				background: rgba(0, 0, 0, 0.6);
-
 			}
-
+			
 			.white {
 				display: none;
 				position: absolute;
@@ -61,7 +61,7 @@
 				margin: auto;
 				z-index: 9999;
 			}
-
+			
 			button {
 				display: block;
 				width: 6.25rem;
@@ -76,7 +76,7 @@
 				margin: 0 auto 0.2rem;
 				border-radius: 10px;
 			}
-
+			
 			.btn4 {
 				background: #4FA2F7;
 				color: #fff;
@@ -97,6 +97,7 @@
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+
 	<body>
 		<div class="content user">
 			<div class="box1">
@@ -165,18 +166,29 @@
 		<div id="popup">
 			<img src="img/close.png" class="img_close" />
 			<img src="img/vip.png" class="img_vip" />
-			<a href="422chongzhi.html"><div class="white"><button type="button" class="btn4">立即开通</button></div></a>
+			<a href="422chongzhi.html">
+				<div class="white"><button type="button" class="btn4">立即开通</button></div>
+			</a>
 		</div>
 		<div class="layer"></div>
 
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		var yonghu = yonghu();
-		console.log(yonghu)
+		var yonghu ;
+		$.ajax({
+			type: 'GET',
+			url: ajaxUrl + '/api/member/getinfo',
+			data: 'user_token=' + user_token,
+			async: false,
+			success: function(res) {
+				yonghu = res.data.userInfo;
+				localStorage.setItem("userInf",JSON.stringify(yonghu))
+			}
+		});
 		$(document).ready(function() {
 
-			$('.box1').html(`<a href="441updateperson.html?name=`+yonghu.nickname + ` &path= `+yonghu.coverPath + ` &num= `+yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
+			$('.box1').html(`<a href="441updateperson.html?name=` + yonghu.nickname + ` &path= ` + yonghu.coverPath + ` &num= ` + yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
 								<h3>` + yonghu.nickname +
 				`</h3>
 								<p></p>
@@ -193,9 +205,10 @@
 				$(".img_vip").slideUp(300);
 				$(".img_close").slideUp(300);
 				$(".white").slideUp(300);
-				
+
 			})
 
 		})
 	</script>
+
 </html>

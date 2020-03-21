@@ -6,12 +6,12 @@ var $aJax = {
 
 	post: function(api, data, success) {
 		var url = ajaxUrl + api;
-		if (isDebug) {
+		if(isDebug) {
 			console.log('[URL]' + url);
 			console.log('[PARM]' + JSON.stringify(data));
 		}
 		$.post(url, data, function(obj) {
-			if (isDebug) console.log('[Res]' + JSON.stringify(obj));
+			if(isDebug) console.log('[Res]' + JSON.stringify(obj));
 			success(obj);
 			// if(obj.msg=='cookei overtime!'){
 			// 	window.location.href='http://www.yixuetang11.com/shop/auth/wechatpubliclogin'
@@ -26,15 +26,15 @@ var $aJax = {
 
 	get: function(api, data, success) {
 		// console.log(data)
-// 		JSON.stringify(data)
+		// 		JSON.stringify(data)
 		// data = JSON.parse(data)
 		var url = ajaxUrl + api;
-		if (isDebug) {
+		if(isDebug) {
 			console.log('[URL]' + url);
 			console.log('[PARM]' + JSON.stringify(data));
 		}
 		$.get(url, data, function(obj) {
-			if (isDebug) console.log('[Res]' + JSON.stringify(obj));
+			if(isDebug) console.log('[Res]' + JSON.stringify(obj));
 			success(obj);
 			// console.log(obj)
 			// if(obj.msg=='cookei overtime!'){
@@ -45,53 +45,52 @@ var $aJax = {
 			// 	window.location.href="www.gx11.cn?nologin=1"
 			// 	return false
 			// }
-			
+
 		}, 'json');
 	}
 
 }
 
 var token = getUrlParam('token');
-if(token){
-	localStorage.setItem('token',token);
+if(token) {
+	localStorage.setItem('token', token);
 }
 
 //中文编码 
 function encode(dat) {
-	
-	return encodeURI(encodeURI(dat)); 
+
+	return encodeURI(encodeURI(dat));
 }
 
 //中文解码
 function decode(dat) {
-	
-	return decodeURI(decodeURI(dat)); 
+
+	return decodeURI(decodeURI(dat));
 }
 
 /////////////获取链接上面的参数
 function getUrlParam(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 	var r = window.location.search.substr(1).match(reg); //匹配目标参数
-	if (r != null) return unescape(r[2]);
+	if(r != null) return unescape(r[2]);
 	return null; //返回参数值
 }
 
 //loading层
-function loading(){
+function loading() {
 	//loading层
 	var loading = layer.load(1, {
-	  shade: [0.1,'#fff'], //0.1透明度的白色背景
-	  success:function(){
-		  $('.main').css('display','none')
-	  }
+		shade: [0.1, '#fff'], //0.1透明度的白色背景
+		success: function() {
+			$('.main').css('display', 'none')
+		}
 	});
-	
-	$(document).ajaxStop(function(){
+
+	$(document).ajaxStop(function() {
 		layer.close(loading)
-		$('.main').css('display','block')
+		$('.main').css('display', 'block')
 	});
 }
-
 
 user_token = localStorage.getItem('token');
 
@@ -103,8 +102,8 @@ function yonghu() {
 		url: ajaxUrl + '/api/member/getinfo',
 		data: 'user_token=' + user_token,
 		async: false,
-		success: function (res) {
-			a =  res.data.userInfo;
+		success: function(res) {
+			a = res.data.userInfo;
 		}
 	});
 	return a
@@ -124,7 +123,7 @@ function getMyDate(str) {
 }
 //补0操作
 function getzf(num) {
-	if (parseInt(num) < 10) {
+	if(parseInt(num) < 10) {
 		num = '0' + num;
 	}
 	return num;

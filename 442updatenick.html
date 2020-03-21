@@ -92,8 +92,9 @@
 	<script type="text/javascript">
 		$(document).ready(function() {	
 			let name = getUrlParam('name');
-			console.log('name')
-			$("#name").attr("value","name");	
+			console.log(name)
+			$("#name").attr("value","name");
 		})
+		console.log(JSON.parse(localStorage.getItem("userInf")))
 	</script>
 </html>
