@@ -14,12 +14,12 @@
 				/* 		width:0.19rem;
 				height:0.34rem; */
 			}
-			
+
 			.list {
 				margin-top: 1.4rem;
 				background: #FFFFFF;
 			}
-			
+
 			.flex {
 				display: flex;
 				flex-direction: row;
@@ -28,40 +28,40 @@
 				padding: 0.23rem 0;
 				border-bottom: 0.02rem #eee solid;
 			}
-			
+
 			.flex:nth-child(3) {
 				border-bottom: none;
 			}
-			
+
 			.name {
 				flex: 1;
 				font-size: 0.15rem;
 				color: #333333;
 			}
-			
+
 			.username {
 				font-size: 0.15rem;
 				color: #878B97;
 				margin-right: 0.1rem;
 			}
-			
+
 			.nick {
 				width: 0.7rem;
 				height: 0.7rem;
 				margin-right: 0.09rem;
 				border-radius: 50%;
 			}
-			
+
 			.next {
 				width: 6.05pt;
 				height: 10pt;
 			}
-			
+
 			.id {
 				font-size: 0.15rem;
 				color: #000000;
 			}
-			
+
 			button {
 				display: block;
 				width: 6.25rem;
@@ -75,7 +75,7 @@
 				color: rgba(34, 34, 34, 1);
 				margin: 0 auto 0.2rem;
 			}
-			
+
 			.btn4 {
 				background: #4FA2F7;
 				color: #fff;
@@ -143,35 +143,52 @@
 			$('#num').html(yonghu.id)
 
 			$("#fileinput").change(function(e) {
+				// var sj = '';
 				var file = e.target.files[0];
-				//				$aJax.get('/api/upload/pictures', {
-				//					user_token: user_token,
-				//					 file:file
-				//				}, function(res) {
-				//					console.log('zj', res.data);
-				//
-				//					if(res.data) {
-				//
-				//					}
-				//				})
-				var formData = new FormData()  
-				formData.append('file', file) ; 
+				var formData = new FormData()
+				formData.append('file', file);
+				formData.append('user_token', user_token);
+				// 				$aJax.get('/api/upload/pictures', {
+				// 					user_token: user_token,
+				// 					 file:formData,
+				// 					 processData: false,
+				// 				}, function(res) {
+				// 					console.log('zj', res.data);
+				// 
+				// 					if(res.data) {
+				// 
+				// 					}
+				// 				})
+				
 				$.ajax({
 					url: ajaxUrl + '/api/upload/pictures',
-					    data: formData,
-					    processData: false,
-					contentType: "application/x-www-form-urlencoded; charset=utf-8",
-					    type: 'POST',
-					    beforeSend: function() {      
-//						loadingInstance = layer.load()    
+					data: formData,
+					processData: false,
+					contentType: false,
+					// contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					type: 'POST',
+					beforeSend: function() {
+						//						loadingInstance = layer.load()    
 					},
 					success: function(res) {
-						
+                     console.log('sj',res)
+                      // sj = res.data.id
 					},
-					error: function(err) {      
-						
-					}  
-				})
+					error: function(err) {
+
+					}
+				})			
+			});
+			$aJax.get('/api/member/edit', {
+				user_token: user_token,
+				// field: ,
+				// val: 
+			}, function(res) {
+				console.log('zj', res.data);
+			
+				if (res.data) {
+			
+				}
 			})
 
 		})
