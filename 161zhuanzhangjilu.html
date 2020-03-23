@@ -20,13 +20,13 @@
 				<!-- <div class="title">2019年11月</div> -->
 				<div class="list">
 					<ul>
-						<!-- <li>
-							<img src="img/erwm02.png" >
+						 <li>
+							<!-- <img src="img/erwm02.png" >
 							<h3 class="line1">发给yy的转账 </h3>
 							<div class="num">-15.25元</div>
-							<p>11月11日 14:15:04 <span>已退款15.25元</span></p>
+							<p>11月11日 14:15:04 <span>已退款15.25元</span></p> -->
 						</li>
-						<li>
+						<!-- <li>
 							<img src="img/erwm02.png" >
 							<h3 class="line1">来自yyyyyyyyyy的转账</h3>
 							<div class="num on">15.25元</div>
@@ -50,23 +50,23 @@
 		var date = myDate.getFullYear()+'-'+ (myDate.getMonth()+1)+'-'+myDate.getDate(); //获取当前时间作为最大时间!
 		$(document).ready(function() {
 			var token = localStorage.getItem('token')
-			var calendar = new datePicker();
-			
-			calendar.init({
-				'trigger': '#dateBtn',
-				/*按钮选择器，用于触发弹出插件*/
-				'type': 'date',
-				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
-				'minDate': '2000-1-1',
-				/*最小日期*/
-				'maxDate': date,
-				/*最大日期*/
-				'onSubmit': function() { /*确认时触发事件*/
-					var theSelectData = calendar.value;
-					console.log(calendar)
-				},
-				'onClose': function() { /*取消时触发事件*/ }
-			});
+			// var calendar = new datePicker();
+			// 
+			// calendar.init({
+			// 	'trigger': '#dateBtn',
+			// 	/*按钮选择器，用于触发弹出插件*/
+			// 	'type': 'date',
+			// 	/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+			// 	'minDate': '2000-1-1',
+			// 	/*最小日期*/
+			// 	'maxDate': date,
+			// 	/*最大日期*/
+			// 	'onSubmit': function() { /*确认时触发事件*/
+			// 		var theSelectData = calendar.value;
+			// 		console.log(calendar)
+			// 	},
+			// 	'onClose': function() { /*取消时触发事件*/ }
+			// });
 			
 			$aJax.get('/api/member/myhblists',{
 				user_token:token,
@@ -87,7 +87,7 @@
 						}
 						
 					}).join('');
-					$('.list ul').html(html)
+					$('.list ul li').html(html)
 				}
 			})
 			

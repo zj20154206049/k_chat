@@ -6,14 +6,15 @@
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
 	<body>
 		<div class="content fahongbao">
 			<div class="header" style="background: #EA4158;">
-				<a href="www.fanhui.com" ><img class="go_back" src="img/jiantou.png" ></a><h1>红包记录</h1><span><img id="dateBtn" src="img/hongbao09.png" ></span>
+				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png"></a>
+				<h1>红包记录</h1><span><img id="dateBtn" src="img/hongbao09.png"></span>
 			</div>
 			<div class="box1">
 				<ul>
@@ -28,16 +29,8 @@
 			<div class="box6">
 				<ul>
 					<li>
-						<h3>拼手气红包 <span>1.25元</span></h3>
-						<p>2019-11-30 14:56:03 <span>已领完</span></p>
-					</li>
-					<li>
-						<h3>拼手气红包 <span>1.25元</span></h3>
-						<p>2019-11-30 14:56:03 <span>已领完</span></p>
-					</li>
-					<li>
-						<h3>拼手气红包 <span>1.25元</span></h3>
-						<p>2019-11-30 14:56:03 <span>已领完</span></p>
+						<!-- <h3>拼手气红包 <span>1.25元</span></h3>
+						<p>2019-11-30 14:56:03 <span>已领完</span></p> -->
 					</li>
 				</ul>
 			</div>
@@ -45,29 +38,78 @@
 	</body>
 	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/datePicker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		var myDate = new Date();
-		var date = myDate.getFullYear()+'-'+ (myDate.getMonth()+1)+'-'+myDate.getDate(); //获取当前时间作为最大时间!
+		var date = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate(); //获取当前时间作为最大时间!
 		$(document).ready(function() {
+			var token = localStorage.getItem('token')
+			$aJax.get('/api/member/myhblists', {
+				user_token: token,
+				type: 0,
+			}, function(res) {
+				console.log(res)
+				var data = res.data.lists;
+				// var listlength = data.length
+				// console.log(listlength)
+				var boxhtml = "";
+				var boxhtmlprice = ""; 
+                var sumprice = 0;
 			
-			var calendar = new datePicker();
-			
-			calendar.init({
-				'trigger': '#dateBtn',
-				/*按钮选择器，用于触发弹出插件*/
-				'type': 'date',
-				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
-				'minDate': '2000-1-1',
-				/*最小日期*/
-				'maxDate': date,
-				/*最大日期*/
-				'onSubmit': function() { /*确认时触发事件*/
-					var theSelectData = calendar.value;
-					console.log(calendar)
-				},
-				'onClose': function() { /*取消时触发事件*/ }
-			});
-			
+				if (data.length) {
+					data.forEach(imp=>{
+						sumprice = imp.price + sumprice
+						console.log(sumprice)
+					})
+					boxhtml =
+						`<div class="box5">
+								<ul>
+									<li>				
+										<p>我一共收到` + data.length +`个红包</p>
+										<h3>${sumprice}<span>元</span> </h3>								
+									</li>
+									</ul>								
+							</div>`
+					$('.box5').html(boxhtml)
+				}
+				if (data) {
+					var html = data.map(function(item) {		
+						if (item.receive_user_info) {
+							return `<li>
+							<h3>拼手气红包 <span>${item.price}元</span></h3>
+							<p>` + getMyDate(item.create_time) +
+								`<span>已领完</span></p>					
+									</li>`
+						}
+
+					}).join('');
+					$('.box6 ul li').html(html)
+				}
+			})
+			// <img src="`+baseUrl+`${item.receive_user_info.cover}" >
+			// <h3 class="line1">发给${item.receive_user_info.nickname}的转账 </h3>
+			// <div class="num">-${item.price}元</div>
+			// <p>`+getMyDate(item.create_time)+` <span style="display:${item.receive_status=="2"?'block':'none'}">已退款15.25元</span></p>
+
+
+			// var calendar = new datePicker();
+			// 
+			// calendar.init({
+			// 	'trigger': '#dateBtn',
+			// 	/*按钮选择器，用于触发弹出插件*/
+			// 	'type': 'date',
+			// 	/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+			// 	'minDate': '2000-1-1',
+			// 	/*最小日期*/
+			// 	'maxDate': date,
+			// 	/*最大日期*/
+			// 	'onSubmit': function() { /*确认时触发事件*/
+			// 		var theSelectData = calendar.value;
+			// 		console.log(calendar)
+			// 	},
+			// 	'onClose': function() { /*取消时触发事件*/ }
+			// });
+
 		})
 	</script>
 </html>
