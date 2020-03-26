@@ -40,7 +40,9 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+			let data = decode(getUrlParam('dat'));
+			console.log(data)
+			$(".erweima").attr("src",data)
 			
 		})
 	</script>

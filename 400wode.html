@@ -9,7 +9,7 @@
 				float: right;
 				color: #4FA2F7;
 			}
-
+			
 			.img_vip {
 				display: none;
 				position: absolute;
@@ -22,7 +22,7 @@
 				height: 4rem;
 				z-index: 9999;
 			}
-
+			
 			.img_close {
 				display: none;
 				position: absolute;
@@ -35,7 +35,7 @@
 				height: 0.6rem;
 				z-index: 9999;
 			}
-
+			
 			.layer {
 				display: none;
 				position: fixed;
@@ -47,7 +47,7 @@
 				z-index: 999;
 				background: rgba(0, 0, 0, 0.6);
 			}
-
+			
 			.white {
 				display: none;
 				position: absolute;
@@ -61,7 +61,7 @@
 				margin: auto;
 				z-index: 9999;
 			}
-
+			
 			button {
 				display: block;
 				width: 6.25rem;
@@ -76,7 +76,7 @@
 				margin: 0 auto 0.2rem;
 				border-radius: 10px;
 			}
-
+			
 			.btn4 {
 				background: #4FA2F7;
 				color: #fff;
@@ -195,8 +195,8 @@
 								<h3>` + yonghu.nickname +
 				`</h3>
 								<p></p>
-								<img class="btn" src="img/wode02.png" >`)
-								<!-- <a href="401wodeerweima.html"></a> -->
+			<img class="btn" src="img/wode02.png" >`)
+
 			$(".inline").click(function() {
 				$('.layer').show()
 				$(".img_vip").fadeIn(300);
@@ -211,19 +211,18 @@
 				$(".white").slideUp(300);
 
 			})
-			$("btn").click(function() {
-				console.log(sfsfsd)
-				// var token = localStorage.getItem('token')
-				$aJax.get('/api/other/getqrcode', {
-					// user_token: token,
-					// data: 1
-					// scene: "centerMyQrcode", 
-					// uid: 164
-				}, function(res) {
-					console.log(res)
-				})
+			$(".btn").click(function() {
+				console.log("sfsfsd")
+				var token = localStorage.getItem('token')
+				let dat = {
+					token: token,
+					scene: "centerMyQrcode",
+					uid: yonghu.id
+				}
+				let href = ajaxUrl + '/api/other/getqrcode?user_token' + token + '&data=' + JSON.stringify(dat);
+				console.log(href)
+				window.location.href = "401wodeerweima.html?dat=" + encode(href);
 			});
-
 
 		})
 	</script>
