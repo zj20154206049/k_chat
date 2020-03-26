@@ -25,7 +25,7 @@
 					<img src="img/tianjia02.png" >
 					<input type="text" name="sousuo" id="sousuo" placeholder="搜索好友ID" />
 				</label>
-				<a href="http://sao315.com/w/api/saoyisao"><label class="on">
+				<a href="www.saoyisao.com"><label class="on">
 					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
 					<span>扫码添加</span>
 				</label></a>
@@ -36,7 +36,7 @@
 					<img src="img/tianjia02.png" >
 					<input type="text" name="sousuo" id="sousuo" placeholder="搜索群聊ID" />
 				</label>
-				<a href="http://sao315.com/w/api/saoyisao"><label class="on">
+				<a href="www.saoyisao.com"><label class="on">
 					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
 					<span>扫码添加</span>
 				</label></a>
@@ -65,10 +65,10 @@
 							if(res.data[0].isFriend == 0) {
 								window.location.href = '211mingpian_bushihaoyou.html?data=' + encode(JSON.stringify(res.data[0]))
 							} else {
-								window.location.href = '211mingpian.html?data=' + encode(JSON.stringify(res.data[0]))
+								window.location.href = '210mingpian.html?data=' + encode(JSON.stringify(res.data[0]))
 							}
 						} else {
-							alert("用户不存在")
+							layer.msg('用户不存在');
 						}
 					})
 				}

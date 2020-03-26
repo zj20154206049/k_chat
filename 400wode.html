@@ -9,7 +9,7 @@
 				float: right;
 				color: #4FA2F7;
 			}
-			
+
 			.img_vip {
 				display: none;
 				position: absolute;
@@ -22,7 +22,7 @@
 				height: 4rem;
 				z-index: 9999;
 			}
-			
+
 			.img_close {
 				display: none;
 				position: absolute;
@@ -35,7 +35,7 @@
 				height: 0.6rem;
 				z-index: 9999;
 			}
-			
+
 			.layer {
 				display: none;
 				position: fixed;
@@ -47,7 +47,7 @@
 				z-index: 999;
 				background: rgba(0, 0, 0, 0.6);
 			}
-			
+
 			.white {
 				display: none;
 				position: absolute;
@@ -61,7 +61,7 @@
 				margin: auto;
 				z-index: 9999;
 			}
-			
+
 			button {
 				display: block;
 				width: 6.25rem;
@@ -76,7 +76,7 @@
 				margin: 0 auto 0.2rem;
 				border-radius: 10px;
 			}
-			
+
 			.btn4 {
 				background: #4FA2F7;
 				color: #fff;
@@ -104,7 +104,9 @@
 				<img class="avatar" src="">
 				<h3>加载中</h3>
 				<p></p>
-				<a href="401wodeerweima.html"><img class="btn" src="img/wode02.png"></a>
+				<!-- <a href="401wodeerweima.html"> -->
+				<img class="btn" src="img/wode02.png">
+				<!-- </a> -->
 			</div>
 			<div class="box2">
 				<ul>
@@ -175,7 +177,7 @@
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		var yonghu ;
+		var yonghu;
 		$.ajax({
 			type: 'GET',
 			url: ajaxUrl + '/api/member/getinfo',
@@ -183,16 +185,18 @@
 			async: false,
 			success: function(res) {
 				yonghu = res.data.userInfo;
-				localStorage.setItem("userInf",JSON.stringify(yonghu))
+				localStorage.setItem("userInf", JSON.stringify(yonghu))
 			}
 		});
 		$(document).ready(function() {
 
-			$('.box1').html(`<a href="441updateperson.html?name=` + yonghu.nickname + ` &path= ` + yonghu.coverPath + ` &num= ` + yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
+			$('.box1').html(`<a href="441updateperson.html?name=` + yonghu.nickname + ` &path= ` + yonghu.coverPath +
+				` &num= ` + yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
 								<h3>` + yonghu.nickname +
 				`</h3>
 								<p></p>
-								<a href="401wodeerweima.html"><img class="btn" src="img/wode02.png" ></a>`)
+								<img class="btn" src="img/wode02.png" >`)
+								<!-- <a href="401wodeerweima.html"></a> -->
 			$(".inline").click(function() {
 				$('.layer').show()
 				$(".img_vip").fadeIn(300);
@@ -207,6 +211,19 @@
 				$(".white").slideUp(300);
 
 			})
+			$("btn").click(function() {
+				console.log(sfsfsd)
+				// var token = localStorage.getItem('token')
+				$aJax.get('/api/other/getqrcode', {
+					// user_token: token,
+					// data: 1
+					// scene: "centerMyQrcode", 
+					// uid: 164
+				}, function(res) {
+					console.log(res)
+				})
+			});
+
 
 		})
 	</script>

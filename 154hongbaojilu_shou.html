@@ -18,12 +18,16 @@
 			</div>
 			<div class="box1">
 				<ul>
-					<li class="on">我收到的</li>
-					<li>我发出的</li>
+					<li class="on" id="frend">我收到的</li>
+					<li id="group">我发出的</li>
 				</ul>
 			</div>
 			<div class="box5" style="margin-top: 0.7rem;">
 				<p>我一共收到48个红包</p>
+				<h3>542.24 <span>元</span> </h3>
+			</div>
+			<div class="revice_box" style="margin-top: 0.7rem;" >
+				<p>我一共发出48个红包</p>
 				<h3>542.24 <span>元</span> </h3>
 			</div>
 			<div class="box6">
@@ -42,7 +46,20 @@
 	<script type="text/javascript">
 		var myDate = new Date();
 		var date = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate(); //获取当前时间作为最大时间!
-		$(document).ready(function() {
+		$(function() {
+			$(document).on('click','#frend',function(){
+				$('.box1 ul li').removeClass('on');
+				$(this).addClass('on');
+				$(".box5").show();
+				$(".revice_box").hide();
+			})	
+			$(document).on('click','#group',function(){
+				$('.box1 li').removeClass('on');
+				$(this).addClass('on');
+				$(".revice_box").show();
+				$(".box5").hide();
+			})	
+
 			var token = localStorage.getItem('token')
 			$aJax.get('/api/member/myhblists', {
 				user_token: token,
@@ -58,8 +75,8 @@
 			
 				if (data.length) {
 					data.forEach(imp=>{
-						sumprice = imp.price + sumprice
-						console.log(sumprice)
+						sumprice = parseInt(imp.price) + sumprice
+						// console.log(sumprice)
 					})
 					boxhtml =
 						`<div class="box5">
@@ -86,29 +103,24 @@
 					$('.box6 ul li').html(html)
 				}
 			})
-			// <img src="`+baseUrl+`${item.receive_user_info.cover}" >
-			// <h3 class="line1">发给${item.receive_user_info.nickname}的转账 </h3>
-			// <div class="num">-${item.price}元</div>
-			// <p>`+getMyDate(item.create_time)+` <span style="display:${item.receive_status=="2"?'block':'none'}">已退款15.25元</span></p>
 
-
-			// var calendar = new datePicker();
-			// 
-			// calendar.init({
-			// 	'trigger': '#dateBtn',
-			// 	/*按钮选择器，用于触发弹出插件*/
-			// 	'type': 'date',
-			// 	/*模式：date日期；datetime日期时间；time时间；ym年月；*/
-			// 	'minDate': '2000-1-1',
-			// 	/*最小日期*/
-			// 	'maxDate': date,
-			// 	/*最大日期*/
-			// 	'onSubmit': function() { /*确认时触发事件*/
-			// 		var theSelectData = calendar.value;
-			// 		console.log(calendar)
-			// 	},
-			// 	'onClose': function() { /*取消时触发事件*/ }
-			// });
+			var calendar = new datePicker();
+			
+			calendar.init({
+				'trigger': '#dateBtn',
+				/*按钮选择器，用于触发弹出插件*/
+				'type': 'date',
+				/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+				'minDate': '2000-1-1',
+				/*最小日期*/
+				'maxDate': date,
+				/*最大日期*/
+				'onSubmit': function() { /*确认时触发事件*/
+					var theSelectData = calendar.value;
+					console.log(calendar)
+				},
+				'onClose': function() { /*取消时触发事件*/ }
+			});
 
 		})
 	</script>

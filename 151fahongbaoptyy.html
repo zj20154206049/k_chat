@@ -17,32 +17,19 @@
 			</div>
 			<div class="box1">
 				<ul>
-					<li class="on">拼手气红包</li>
-					<a href="153fahongbaosq.html"><li>语音红包</li></a>
+					<a href="151fahongbaopt.html"><li>普通红包</li></a>
+					<li class="on">语音红包</li>
 				</ul>
 			</div>
 			<div class="box2">
 				<label>
-					红包个数 <span>个</span> <input type="number" name="" id="num" value="" placeholder="0" />
+					设置口令 <input type="number" name="" id="text" value="" placeholder="输入文字口令" />
 				</label>
 				<label>
 					总金额 <span>元</span> <input type="number" name="" id="total" value="" placeholder="输入金额" />
 				</label>
-				<label>
-					<input class="input" type="text" name="" id="remarks" value="" placeholder="恭喜发财，大吉大利" />
-				</label>
 			</div>
-			<div class="box3">
-				<div class="title">选择红包封面</div>
-				<div class="tab">
-					<ul>
-						<li class="on"><img src="img/hongbao04.png" ><p>默认封皮</p></li>
-						<li><img src="img/hongbao05.png" ></li>
-						<li><img src="img/hongbao06.png" ></li>
-					</ul>
-				</div>
-				<button type="button" class="btn">塞钱</button>
-			</div>
+			<button type="button" class="btn">塞钱</button>
 		</div>
 		<div class="model" style="display: none;">
 			<div class="title">请输入支付密码</div>
@@ -65,9 +52,8 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var group_id = getUrlParam('groupId');
+			var uid_id = getUrlParam('uidId');
 			var token = localStorage.getItem('token')
-			
 			var fengmian = 1;
 			// 封面选项卡
 			$('.tab ul li').click(function(){
@@ -79,10 +65,11 @@
 			$('.btn').click(function(){
 				
 				// 获取红包的内容
-				var num = $('#num').val();
+				// var num = $('#num').val();
 				var total = $('#total').val();
+				var text = $('#text').val();
 				var remarks = $('#remarks').val();
-				if(num=='' || total==''){layer.msg('请输入内容');return false;};
+				if(total==''||text==''){layer.msg('请输入内容');return false;};
 				
 				
 				$('.total').html(`<span>￥</span>`+total+``);
@@ -111,12 +98,12 @@
 					// 获取红包的内容
 					$aJax.post('/api/member/giveouthb',{
 						user_token:token,
-						open_type:0, //0普通红包，1语音红包
-						to_group_id:group_id, //群组id
+						open_type:1, //0普通红包，1语音红包
+						to_uid:uid_id, //id
 						total:$('#total').val(),
-						count:$('#num').val(),
-						remarks:$('#remarks').val(),
+						count:1,
 						pay_password:val,
+						remarks:$('#text').val(),
 					},function(res){
 						console.log(res);
 						
