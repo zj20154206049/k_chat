@@ -6,19 +6,22 @@
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
 	<body style="background: #F5F6FA;">
-		<div class="content fahongbao">
+		<div class="content fahongbao vvv">
 			<div class="header" style="background: #EA4158;">
-				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png" ></a><h1>发红包</h1>
+				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png"></a>
+				<h1>发红包</h1>
 			</div>
 			<div class="box1">
 				<ul>
 					<li class="on">普通红包</li>
-					<li>语音红包</li>
+					<a href="151fahongbaoptyy.html">
+						<li>语音红包</li>
+					</a>
 				</ul>
 			</div>
 			<div class="box2">
@@ -33,9 +36,11 @@
 				<div class="title">选择红包封面</div>
 				<div class="tab">
 					<ul>
-						<li class="on"><img src="img/hongbao04.png" ><p>默认封皮</p></li>
-						<li><img src="img/hongbao05.png" ></li>
-						<li><img src="img/hongbao06.png" ></li>
+						<li class="on"><img src="img/hongbao04.png">
+							<p>默认封皮</p>
+						</li>
+						<li><img src="img/hongbao05.png"></li>
+						<li><img src="img/hongbao06.png"></li>
 					</ul>
 				</div>
 				<button type="button" class="btn">塞钱</button>
@@ -43,7 +48,7 @@
 		</div>
 		<div class="model" style="display: none;">
 			<div class="title">请输入支付密码</div>
-			<img class="close" src="img/hognbao07.png" >
+			<img class="close" src="img/hognbao07.png">
 			<h3>K聊红包</h3>
 			<p class="total"><span>￥</span>0.00</p>
 			<h4>支付方式 <span>余额</span></h4>
@@ -64,84 +69,84 @@
 		$(document).ready(function() {
 			var uid_id = getUrlParam('uidId');
 			var token = localStorage.getItem('token')
-			
 			var fengmian = 1;
 			// 封面选项卡
-			$('.tab ul li').click(function(){
+			$('.tab ul li').click(function() {
 				$('.tab ul li').removeClass('on');
 				$(this).addClass('on');
-				fengmian = $(this).index()+1;
+				fengmian = $(this).index() + 1;
 			})
-			
-			$('.btn').click(function(){
-				
+
+			$('.btn').click(function() {
 				// 获取红包的内容
 				// var num = $('#num').val();
 				var total = $('#total').val();
 				var remarks = $('#remarks').val();
-				if(total==''){layer.msg('请输入内容');return false;};
-				
-				
-				$('.total').html(`<span>￥</span>`+total+``);
-				var html = '<div class="model">'+$('.model').html()+'</div>'
+				if (total == '') {
+					layer.msg('请输入内容');
+					return false;
+				};
+				$('.total').html(`<span>￥</span>` + total + ``);
+				var html = '<div class="model">' + $('.model').html() + '</div>'
 				// console.log(html);
 				layer.open({
-					title:false,
-					closeBtn:false,
-					shadeClose:false,
-					shift :5,
+					title: false,
+					closeBtn: false,
+					shadeClose: false,
+					shift: 5,
 					shade: [0.8, '#000'],
-				    type:1,
-				    skin: 'model_hongbao', //加上边框
-				    area: ['92%', ''], //宽高
-				    content: html
+					type: 1,
+					offset:'200px',
+					skin: 'model_hongbao', //加上边框
+					area: ['92%', ''], //宽高
+					content: html
 				});
 			})
-			
-			$(document).on('keyup','.model_hongbao .hide',function(){
+
+			$(document).on('keyup', '.model_hongbao .hide', function() {
 				var val = $('.model_hongbao .hide').val();
 				var length = $('.model_hongbao .hide').val().length
 				if (length >= 6) {
-					val = val.substring(0,6);
+					val = val.substring(0, 6);
 					$('.model_hongbao .hide').val(val);
 					// 获取红包的内容
-					$aJax.post('/api/member/giveouthb',{
-						user_token:token,
-						open_type:0, //0普通红包，1语音红包
-						to_uid:uid_id, //id
-						total:$('#total').val(),
-						count:1,
-						remarks:$('#remarks').val(),
-						pay_password:val,
-					},function(res){
+					$aJax.post('/api/member/giveouthb', {
+						user_token: token,
+						open_type: 0, //0普通红包，1语音红包
+						to_uid: uid_id, //id
+						total: $('#total').val(),
+						count: 1,
+						remarks: $('#remarks').val(),
+						pay_password: val,
+					}, function(res) {
 						console.log(res);
-						
-						if(res.code=='1'){
+
+						if (res.code == '1') {
 							layer.msg('发送成功');
-							setTimeout(function(){
+							setTimeout(function() {
 								window.location.href = 'www.zhifu.com?id=' + res.data.hb_id + '&bgImg=' + fengmian
-							},500)
+							}, 500)
 							// 
-						}else{
+						} else {
 							layer.msg(res.msg);
 						}
 					})
 					//给APP用!支付完成的回调
-					
+
 				}
 				dome(val)
 			})
-			$(document).on('click','.close',function(){
+			$(document).on('click', '.close', function() {
 				layer.closeAll()
 			})
-			
-			function dome (value){
+
+			function dome(value) {
 				$('.model_hongbao .input').find('input').val('')
-				for (var i=0;i<value.length;i++) {
+				for (var i = 0; i < value.length; i++) {
 					$('.model_hongbao .input').find('input').eq(i).val(value[i])
 				}
 			}
-			
+
 		})
 	</script>
 	<!-- <script type="text/javascript">
