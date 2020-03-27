@@ -40,9 +40,19 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			let data = decode(getUrlParam('dat'));
-			console.log(data)
-			$(".erweima").attr("src",data)
+			let id = getUrlParam('id');
+			
+			var token = localStorage.getItem('token')
+				let dat = {
+					token: token,
+					scene: "centerMyQrcode",
+					uid: id
+				}
+				let href = ajaxUrl + '/api/other/getqrcode?user_token' + token + '&data=' + JSON.stringify(dat);
+				console.log(href)
+			
+			
+			$(".erweima").attr("src",href)
 			
 		})
 	</script>
