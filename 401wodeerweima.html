@@ -9,32 +9,44 @@
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="css/erweima.css"/>
+	<link rel="stylesheet" type="text/css" href="css/erweima.css" />
 	<body style="background: #F5F6FA;">
 		<div class="box1">
-			<img class="erweima" src="img/wode01.png" >
+			<div class="codebox">
+				<img class="erweima" src="img/wode01.png">
+				<div class="user_info">
+					<div class="user_img">
+						<img src="img/chongzhi03.png" />
+					</div>
+					<div class="user_rig">
+						<div class="user_nick">卡西</div>
+						<div class="user_text">扫一扫二维码，加我好友</div>
+					</div>
+				</div>
+			</div>
 			<div class="list">
 				<ul>
 					<li>
 						<a href="www.fahaoyou.com">
-							<img src="img/erwm01.png" >
+							<img src="img/erwm01.png">
 							<p>发送给好友</p>
 						</a>
 					</li>
 					<li>
 						<a href="www.faqunliao.com">
-							<img src="img/erwm02.png" >
+							<img src="img/erwm02.png">
 							<p>分享到群聊</p>
 						</a>
 					</li>
 					<li>
 						<a href="www.baocunxiangce.com">
-							<img src="img/erwm03.png" >
+							<img src="img/erwm03.png">
 							<p>保存到相册</p>
 						</a>
 					</li>
 				</ul>
 			</div>
+
 		</div>
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
@@ -42,8 +54,8 @@
 		$(document).ready(function() {
 			let data = decode(getUrlParam('dat'));
 			console.log(data)
-			$(".erweima").attr("src",data)
-			
+			$(".erweima").attr("src", data)
+
 		})
 	</script>
 </html>
