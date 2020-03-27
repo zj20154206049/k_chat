@@ -85,7 +85,7 @@
 					<input value="dam大魔王" id="name" />
 					<!-- <div class="username"></div> -->
 				</div>
-				<a href="441updateperson.html"><button type="button" class="btn4" id="sub">保存</button></a>
+				<button type="button" class="btn4" id="sub">保存</button>
 			</div>
 		</div> 
 	</body>
@@ -100,11 +100,10 @@
 					field: "nickname",
 					val: $("#name").val()
 				}, function(res) {
-					console.log('zj', res.data);
-
-					if (res.data) {
-
-					}
+					layer.msg('修改成功');
+					setTimeout(function(){				
+						window.location.href = '441updateperson.html'
+					},1000)			
 				})
 			});
 

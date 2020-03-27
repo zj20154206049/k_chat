@@ -106,7 +106,7 @@
 					<div class="name">头像</div>
 					<label for="fileinput" id="tip" style="display:inline-block;">
 						<img src="" class="nick" id="head" />
-						<input type="file" id="fileinput" accept="image/gif, image/jpeg, image/png"  style="display: none;" />
+						<input type="file" id="fileinput" accept="image/gif, image/jpeg, image/png" style="display: none;" />
 					</label>
 				</div>
 				<a href="442updatenick.html">
@@ -120,8 +120,7 @@
 					<div class="name">ID</div>
 					<div class="id" id="num"></div>
 				</div>
-
-				<a href="400wode.html"><button type="button" class="btn4">保存</button></a>
+					<button type="button" class="btn4">保存</button>
 			</div>
 		</div>
 	</body>
@@ -139,6 +138,17 @@
 			$('#name').html(yonghu.nickname)
 			$('#head').attr("src", yonghu.coverPath)
 			$('#num').html(yonghu.id)
+
+			$('.btn4').click(function() {
+				$aJax.get('/api/member/getinfo', {
+					user_token: user_token
+				}, function(res) {
+					layer.msg('保存成功');
+					setTimeout(function(){				
+						window.location.href = '400wode.html?myname='  + yonghu.nickname 
+					},1000)	
+				})
+			})
 
 			$("#fileinput").change(function(e) {
 				// var sj = '';
@@ -166,7 +176,7 @@
 							history.go(0)
 							// $('#head').attr("src", yonghu.coverPath)
 						});
-						
+
 
 					},
 					error: function(err) {

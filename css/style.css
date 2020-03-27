@@ -614,7 +614,8 @@
 	margin: 0.4rem 4% 0;
 	width:92%;
 	height:1rem;
-	background:rgba(178,239,254,1);
+	background:#4FA2F7;
+	/* 4FA2F7 */
 	border-radius:0.04rem;
 	font-size:0.34rem;
 	font-family:PingFang SC;
@@ -954,6 +955,31 @@
 .fahongbao .box5 h3 span{
 	font-size: 0.3rem;
 }
+.fahongbao .revice_box{
+	text-align: center;
+	margin: 0.4rem 0 0;
+}
+.fahongbao .revice_box p{
+	font-size:0.32rem;
+	font-family:PingFang SC;
+	font-weight:500;
+	color:rgba(34,34,34,1);
+	line-height:0.32rem;
+	margin-top: 0.18rem;
+}
+.fahongbao .revice_box h3{
+	font-size:0.58rem;
+	font-family:PingFang SC;
+	font-weight:bold;
+	color:rgba(234,65,88,1);
+	line-height:0.58rem;
+	margin-top: 0.4rem;
+}
+.fahongbao .revice_box h3 span{
+	font-size: 0.3rem;
+}
+
+
 .fahongbao .box5 h4{
 	font-size:.32rem;
 	font-family:PingFang SC;

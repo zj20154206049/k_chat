@@ -16,15 +16,15 @@
 				<div class="box2">
 					<label>
 						<span>旧密码</span>
-						<input type="text" name="" id="name" value="" placeholder="请输入旧登录密码" />
+						<input type="text" name="" id="oldPassword" value="" placeholder="请输入旧登录密码" />
 					</label>
 					<label>
 						<span>新密码</span>
-						<input type="text" name="" id="name" value="" placeholder="请输入新登录密码" />
+						<input type="text" name="" id="password" value="" placeholder="请输入新登录密码" />
 					</label>
 					<label>
 						<span>确认密码</span>
-						<input type="text" name="" id="name" value="" placeholder="请再次输入登录密码" />
+						<input type="text" name="" id="confirmPassword" value="" placeholder="请再次输入登录密码" />
 					</label>
 				</div>
 				<button type="submit" id="subm">完成</button>
@@ -36,15 +36,26 @@
 		var yonghu = yonghu();
 		$(document).ready(function() {
         $("#subm").click(function(){
+		var oldPassword = $('#oldPassword').val();
+		var password = $('#password').val();
+		var confirmPassword = $('#confirmPassword').val();
+		if (oldPassword == '' || password == '' || confirmPassword == '') {
+			layer.msg('请输入完整内容');
+			return false;
+		}
+		if (password != confirmPassword) {
+			layer.msg('请输入两次一致的密码');
+			return false;
+		}
         $aJax.post('/api/member/setpassword', {
         	user_token: user_token,
-        	pwd:yonghu.account
-        	// val: $("#name").val()
+        	pwd:confirmPassword
         }, function(res) {
-        	console.log('zj', res.data);
-        
-        	if (res.data) {
-        
+        	layer.msg(res.msg);
+        	if (res.code == '1') {
+        		setTimeout(function() {
+        			window.location.href = '440shezhi_zhanghao.html'
+        		}, 1500)
         	}
         })
         })	

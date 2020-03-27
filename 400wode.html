@@ -9,7 +9,7 @@
 				float: right;
 				color: #4FA2F7;
 			}
-			
+
 			.img_vip {
 				display: none;
 				position: absolute;
@@ -22,7 +22,7 @@
 				height: 4rem;
 				z-index: 9999;
 			}
-			
+
 			.img_close {
 				display: none;
 				position: absolute;
@@ -35,7 +35,7 @@
 				height: 0.6rem;
 				z-index: 9999;
 			}
-			
+
 			.layer {
 				display: none;
 				position: fixed;
@@ -47,7 +47,7 @@
 				z-index: 999;
 				background: rgba(0, 0, 0, 0.6);
 			}
-			
+
 			.white {
 				display: none;
 				position: absolute;
@@ -61,7 +61,7 @@
 				margin: auto;
 				z-index: 9999;
 			}
-			
+
 			button {
 				display: block;
 				width: 6.25rem;
@@ -76,7 +76,7 @@
 				margin: 0 auto 0.2rem;
 				border-radius: 10px;
 			}
-			
+
 			.btn4 {
 				background: #4FA2F7;
 				color: #fff;
@@ -177,7 +177,7 @@
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		var yonghu;
+		var yonghu = yonghu();	
 		$.ajax({
 			type: 'GET',
 			url: ajaxUrl + '/api/member/getinfo',
@@ -188,13 +188,13 @@
 				localStorage.setItem("userInf", JSON.stringify(yonghu))
 			}
 		});
-		$(document).ready(function() {
-
+		$(document).ready(function() {	
 			$('.box1').html(`<a href="441updateperson.html?name=` + yonghu.nickname + ` &path= ` + yonghu.coverPath +
 				` &num= ` + yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
 								<h3>` + yonghu.nickname +
 				`</h3>
-								<p></p>
+								<p>` + yonghu.account +
+				`</p>
 			<img class="btn" src="img/wode02.png" >`)
 
 			$(".inline").click(function() {
@@ -212,7 +212,7 @@
 
 			})
 			$(".btn").click(function() {
-				
+
 				window.location.href = "401wodeerweima.html?id=" + yonghu.id;
 			});
 

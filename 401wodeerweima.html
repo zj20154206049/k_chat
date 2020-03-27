@@ -16,10 +16,10 @@
 				<img class="erweima" src="img/wode01.png">
 				<div class="user_info">
 					<div class="user_img">
-						<img src="img/chongzhi03.png" />
+						<img src="" id="head"/>
 					</div>
 					<div class="user_rig">
-						<div class="user_nick">卡西</div>
+						<div class="user_nick" id="name"></div>
 						<div class="user_text">扫一扫二维码，加我好友</div>
 					</div>
 				</div>
@@ -51,23 +51,20 @@
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		var yonghu = yonghu();
 		$(document).ready(function() {
-			let data = decode(getUrlParam('dat'));
-			console.log(data)
-			$(".erweima").attr("src", data)
+			$('#head').attr("src",yonghu.coverPath)
+			$('#name').html(yonghu.nickname)
 			let id = getUrlParam('id');
-			
 			var token = localStorage.getItem('token')
-				let dat = {
-					token: token,
-					scene: "centerMyQrcode",
-					uid: id
-				}
-				let href = ajaxUrl + '/api/other/getqrcode?user_token' + token + '&data=' + JSON.stringify(dat);
-				console.log(href)
-			
-			$(".erweima").attr("src",href)
-			
+			let dat = {
+				token: token,
+				scene: "centerMyQrcode",
+				uid: id
+			}
+			let href = ajaxUrl + '/api/other/getqrcode?user_token' + token + '&data=' + JSON.stringify(dat);
+			console.log(href)
+			$(".erweima").attr("src", href)
 		})
 	</script>
 </html>
