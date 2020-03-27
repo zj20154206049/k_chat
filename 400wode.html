@@ -212,15 +212,8 @@
 
 			})
 			$(".btn").click(function() {
-				var token = localStorage.getItem('token')
-				let dat = {
-					token: token,
-					scene: "centerMyQrcode",
-					uid: yonghu.id
-				}
-				let href = ajaxUrl + '/api/other/getqrcode?user_token' + token + '&data=' + JSON.stringify(dat);
-				console.log(href)
-				window.location.href = "401wodeerweima.html?dat=" + encode(href);
+				
+				window.location.href = "401wodeerweima.html?id=" + yonghu.id;
 			});
 
 		})
