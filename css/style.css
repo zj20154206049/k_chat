@@ -997,6 +997,9 @@
 	padding: 0.3rem 0;
 	border-bottom: 1px solid #EBECF4;
 }
+.fahongbao .box6 ul li:last-child{
+	border-bottom: none;
+}
 .fahongbao .box6 ul li h3{
 	font-size:0.34rem;
 	font-family:PingFang SC;
@@ -1170,9 +1173,10 @@
 }
 .hongbaoxq .box3 .list{
 	padding: 0 0.3rem;
+	border-bottom: 1px solid #EBECF4;
 }
 .hongbaoxq .box3 .list ul li{
-	border-bottom: 1px solid #EBECF4;
+	/* border-bottom: 1px solid #EBECF4; */
 	padding: 0.3rem 0 0.2rem;
 	clear: both;
 	overflow: hidden;
@@ -1648,6 +1652,7 @@
 	left: 0;
 }
 .payment .box2 label input{
+	width: 100%;
 	border: none;
 	font-size:0.28rem;
 	font-family:PingFang SC;

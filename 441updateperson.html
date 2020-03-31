@@ -138,12 +138,14 @@
 			$('#name').html(yonghu.nickname)
 			$('#head').attr("src", yonghu.coverPath)
 			$('#num').html(yonghu.id)
-
 			$('.btn4').click(function() {
-				$aJax.get('/api/member/getinfo', {
-					user_token: user_token
+				$aJax.get('/api/member/edit', {
+					user_token: user_token,
+					field: "nickname",
+					val: yonghu.nickname
 				}, function(res) {
 					layer.msg('保存成功');
+					// console.log(yonghu.nickname)
 					setTimeout(function(){				
 						window.location.href = '400wode.html?myname='  + yonghu.nickname 
 					},1000)	

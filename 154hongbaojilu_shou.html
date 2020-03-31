@@ -23,12 +23,12 @@
 				</ul>
 			</div>
 			<div class="box5" style="margin-top: 0.7rem;">
-				<p>我一共收到48个红包</p>
-				<h3>542.24 <span>元</span> </h3>
+				<p></p>
+				<h3><span>元</span> </h3>
 			</div>
 			<div class="revice_box" style="margin-top: 0.7rem;display: none;">
-				<p>我一共发出48个红包</p>
-				<h3>542.24 <span>元</span> </h3>
+				<p></p>
+				<h3><span>元</span> </h3>
 			</div>
 			<div class="box6">
 				<ul>
@@ -44,68 +44,193 @@
 	<script src="js/datePicker.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		var token = localStorage.getItem('token')
+		$aJax.get('/api/member/myhblists', {
+			user_token: token,
+			type: 0,
+			uid: yonghu.id
+			// to_uid:0,
+			// to_group_id:0
+		}, function(res) {
+			var data = res.data.lists;
+			var boxhtml = "";
+			var boxhtmlprice = "";
+			var sumprice = 0;
+		
+			if (data && data.length > 0) {
+				data.forEach(imp => {
+					sumprice = parseInt(imp.price) + sumprice
+					// console.log(sumprice)
+				})
+				boxhtml =
+					`<div class="box5">
+							<ul>
+								<li>				
+									<p>我一共收到` + data.length +
+					`个红包</p>
+									<h3>${sumprice}<span>元</span> </h3>								
+								</li>
+								</ul>								
+						</div>`
+				$('.box5').html(boxhtml)
+			} else {
+				boxhtml =
+					`<div class="box5">
+							<ul>
+								<li>				
+									<p>我一共收到0个红包</p>
+									<h3>0<span>元</span> </h3>								
+								</li>
+								</ul>								
+						</div>`
+				$('.box5').html(boxhtml)
+			}
+			if (data) {
+				var html = data.map(function(item) {
+					if (item.receive_user_info) {
+						return `<li>
+						<h3>拼手气红包 <span>${item.price}元</span></h3>
+						<p>` + getMyDate(item.create_time) +
+							`<span>已领完</span></p>					
+								</li>`
+					}
+		
+				}).join('');
+				$('.box6 ul li').html(html)
+			}
+		})
 		var myDate = new Date();
 		var date = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate(); //获取当前时间作为最大时间!
 		$(function() {
-			$(document).on('click','#frend',function(){
+			$(document).on('click', '#frend', function() {
 				$('.box1 ul li').removeClass('on');
 				$(this).addClass('on');
 				$(".box5").show();
 				$(".revice_box").hide();
-			})	
-			$(document).on('click','#group',function(){
+				$aJax.get('/api/member/myhblists', {
+					user_token: token,
+					type: 0,
+					uid: yonghu.id
+					// to_uid:0,
+					// to_group_id:0
+				}, function(res) {
+					console.log(res)
+					var data = res.data.lists;
+					// var listlength = data.length
+					// console.log(listlength)
+					var boxhtml = "";
+					var boxhtmlprice = "";
+					var sumprice = 0;
+
+					if (data && data.length > 0) {
+						data.forEach(imp => {
+							sumprice = parseInt(imp.price) + sumprice
+							// console.log(sumprice)
+						})
+						boxhtml =
+							`<div class="box5">
+									<ul>
+										<li>				
+											<p>我一共收到` + data.length +
+							`个红包</p>
+											<h3>${sumprice}<span>元</span> </h3>								
+										</li>
+										</ul>								
+								</div>`
+						$('.box5').html(boxhtml)
+					} else {
+						boxhtml =
+							`<div class="box5">
+									<ul>
+										<li>				
+											<p>我一共收到0个红包</p>
+											<h3>0<span>元</span> </h3>								
+										</li>
+										</ul>								
+								</div>`
+						$('.box5').html(boxhtml)
+					}
+					if (data) {
+						var html = data.map(function(item) {
+							if (item.receive_user_info) {
+								return `<li>
+								<h3>拼手气红包 <span>${item.price}元</span></h3>
+								<p>` + getMyDate(item.create_time) +
+									`<span>已领完</span></p>					
+										</li>`
+							}
+
+						}).join('');
+						$('.box6 ul li').html(html)
+					}
+				})
+			})
+			$(document).on('click', '#group', function() {
 				$('.box1 li').removeClass('on');
 				$(this).addClass('on');
 				$(".revice_box").show();
 				$(".box5").hide();
-			})	
+				$aJax.get('/api/member/myhblists', {
+					user_token: token,
+					type: 0,
+					// uid:yonghu.id
+					to_uid: 0,
+					to_group_id: 0
+				}, function(res) {
+					console.log(res)
+					var data = res.data.lists;
+					// var listlength = data.length
+					// console.log(listlength)
+					var boxhtml = "";
+					var boxhtmlprice = "";
+					var sumprice = 0;
 
-			var token = localStorage.getItem('token')
-			$aJax.get('/api/member/myhblists', {
-				user_token: token,
-				type: 0,
-			}, function(res) {
-				console.log(res)
-				var data = res.data.lists;
-				// var listlength = data.length
-				// console.log(listlength)
-				var boxhtml = "";
-				var boxhtmlprice = ""; 
-                var sumprice = 0;
-			
-				if (data.length) {
-					data.forEach(imp=>{
-						sumprice = parseInt(imp.price) + sumprice
-						// console.log(sumprice)
-					})
-					boxhtml =
-						`<div class="box5">
-								<ul>
-									<li>				
-										<p>我一共收到` + data.length +`个红包</p>
-										<h3>${sumprice}<span>元</span> </h3>								
-									</li>
-									</ul>								
-							</div>`
-					$('.box5').html(boxhtml)
-				}
-				if (data) {
-					var html = data.map(function(item) {		
-						if (item.receive_user_info) {
-							return `<li>
-							<h3>拼手气红包 <span>${item.price}元</span></h3>
-							<p>` + getMyDate(item.create_time) +
-								`<span>已领完</span></p>					
-									</li>`
-						}
+					if (data && data.length > 0) {
+						data.forEach(imp => {
+							sumprice = parseInt(imp.price) + sumprice
+							// console.log(sumprice)
+						})
+						boxhtml =
+							`<div class="revice_box">
+									<ul>
+										<li>				
+											<p>我一共收到` + data.length +
+							`个红包</p>
+											<h3>${sumprice}<span>元</span> </h3>								
+										</li>
+										</ul>								
+								</div>`
+						$('.revice_box').html(boxhtml)
+					} else {
+						boxhtml =
+							`<div class="revice_box">
+									<ul>
+										<li>				
+											<p>我一共收到0个红包</p>
+											<h3>0<span>元</span> </h3>								
+										</li>
+										</ul>								
+								</div>`
+						$('.revice_box').html(boxhtml)
+					}
+					if (data) {
+						var html = data.map(function(item) {
+							if (item.receive_user_info) {
+								return `<li>
+								<h3>拼手气红包 <span>${item.price}元</span></h3>
+								<p>` + getMyDate(item.create_time) +
+									`<span>已领完</span></p>					
+										</li>`
+							}
 
-					}).join('');
-					$('.box6 ul li').html(html)
-				}
+						}).join('');
+						$('.box6 ul li').html(html)
+					}
+				})
+
 			})
 
 			var calendar = new datePicker();
-			
 			calendar.init({
 				'trigger': '#dateBtn',
 				/*按钮选择器，用于触发弹出插件*/

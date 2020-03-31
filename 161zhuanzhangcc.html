@@ -28,7 +28,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var id = getUrlParam('id');
-			
 			$aJax.get('/api/member/openhb',{id:id,user_token:localStorage.getItem('token')},function(res){
 				console.log(res);
 				if(res.data.lists){

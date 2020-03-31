@@ -13,7 +13,8 @@
 	<body>
 		<div class="content fahongbao">
 			<div class="header" style="background: #EA4158;">
-				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png" ></a><h1>和TA的记录</h1><span>红包记录</span>
+				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png" ></a><h1>和TA的记录</h1>
+				<!-- <span>红包记录</span> -->
 			</div>
 			<div class="box1">
 				<ul>
@@ -92,13 +93,14 @@
 				$aJax.get('/api/member/myhblists',{
 					user_token:token,
 					type:0,
-					uid:uid,
+					// uid:uid,
 					to_uid:id,
 				},function(res){
 					console.log(res);
 					var total = 0
 					var data = res.data.lists
 					var html = data.map(function(item){
+						total = parseInt(item.price) + total
 						var text = '普通红包'
 						if(item.open_type=='1'){text='语音红包'}
 						return `<li>
