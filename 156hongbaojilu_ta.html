@@ -6,14 +6,15 @@
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
 	<body>
 		<div class="content fahongbao">
 			<div class="header" style="background: #EA4158;">
-				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png" ></a><h1>和TA的记录</h1>
+				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png"></a>
+				<h1>和TA的记录</h1>
 				<!-- <span>红包记录</span> -->
 			</div>
 			<div class="box1">
@@ -54,63 +55,84 @@
 			var token = localStorage.getItem('token');
 			var id = getUrlParam('id');
 			var uid = yonghu.id
-			
-			$('.box1 ul li').click(function(){
+
+			$('.box1 ul li').click(function() {
 				$('.box1 ul li').removeClass('on')
 				$(this).addClass('on');
-				if($(this).index()=='0'){
+				if ($(this).index() == '0') {
 					get()
-				}else{
+				} else {
 					show()
 				}
 			});
 			get()
-			function get(){
-				$aJax.get('/api/member/myhblists',{
-					user_token:token,
-					type:0,
-					uid:id,
-				},function(res){
+
+			function get() {
+				$aJax.get('/api/member/myhblists', {
+					user_token: token,
+					type: 0,
+					uid: id,
+				}, function(res) {
 					console.log(res);
 					var total = 0;
 					var data = res.data.lists;
-					var html = data.map(function(item){
+					//按照最新时间排序
+					if (data) {
+						data.sort(function(a, b) {
+							return b.create_time - a.create_time;
+						});
+					}
+					var html = data.map(function(item) {
 						var text = '普通红包'
-						if(item.open_type=='1'){text='语音红包'}
+						if (item.open_type == '1') {
+							text = '语音红包'
+						}
 						total += Number(item.price);
 						return `<li>
-									<h3>`+text+` <span>${item.price}元</span></h3>
-									<p>`+getMyDate(`${item.create_time}`)+`</p>
+									<h3>` + text + ` <span>${item.price}元</span></h3>
+									<p>` + getMyDate(
+							`${item.create_time}`) + `</p>
 								</li>`
 					}).join('');
 					$('.box6 ul').html(html);
-					
-					$('.box5').html(`<p>我共收到TA发的`+data.length+`个红包</p><h3><span>共</span>`+total.toFixed(2)+` <span>元</span></h3>`)
+
+					$('.box5').html(`<p>我共收到TA发的` + data.length + `个红包</p><h3><span>共</span>` + total.toFixed(2) +
+						` <span>元</span></h3>`)
 				})
 			}
-			
-			function show(){
-				$aJax.get('/api/member/myhblists',{
-					user_token:token,
-					type:0,
+
+			function show() {
+				$aJax.get('/api/member/myhblists', {
+					user_token: token,
+					type: 0,
 					// uid:uid,
-					to_uid:id,
-				},function(res){
+					to_uid: id,
+				}, function(res) {
 					console.log(res);
 					var total = 0
 					var data = res.data.lists
-					var html = data.map(function(item){
+					//按照最新时间排序
+					if (data) {
+						data.sort(function(a, b) {
+							return b.create_time - a.create_time;
+						});
+					}
+					var html = data.map(function(item) {
 						total = parseInt(item.price) + total
 						var text = '普通红包'
-						if(item.open_type=='1'){text='语音红包'}
+						if (item.open_type == '1') {
+							text = '语音红包'
+						}
 						return `<li>
-									<h3>`+text+` <span>${item.price}元</span></h3>
-									<p>`+getMyDate(`${item.create_time}`)+`</p>
+									<h3>` + text + ` <span>${item.price}元</span></h3>
+									<p>` + getMyDate(
+							`${item.create_time}`) + `</p>
 								</li>`
 					}).join('');
 					$('.box6 ul').html(html);
-					
-					$('.box5').html(`<p>我一共发出`+data.length+`个红包</p><h3><span>共</span>`+total.toFixed(2)+` <span>元</span></h3>`)
+
+					$('.box5').html(`<p>我一共发出` + data.length + `个红包</p><h3><span>共</span>` + total.toFixed(2) +
+						` <span>元</span></h3>`)
 				})
 			}
 		})

@@ -6,13 +6,14 @@
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
 	<body style="background: #F5F6F9;">
 		<div class="header on">
-			<a href="www.fanhui.com" ><img class="go_back" src="img/fanhui.png" ></a><h1>转账记录</h1>
+			<a href="www.fanhui.com"><img class="go_back" src="img/fanhui.png"></a>
+			<h1>转账记录</h1>
 			<!-- <span id="dateBtn"><img src="img/zhuanzhang04.png" ></span> -->
 		</div>
 		<div class="content payment">
@@ -20,7 +21,7 @@
 				<!-- <div class="title">2019年11月</div> -->
 				<div class="list">
 					<ul>
-						 <li>
+						<li>
 							<!-- <img src="img/erwm02.png" >
 							<h3 class="line1">发给yy的转账 </h3>
 							<div class="num">-15.25元</div>
@@ -36,7 +37,7 @@
 				</div>
 			</div>
 			<div class="no_list" style="display: none;">
-				<img src="img/hongbao10.png" >
+				<img src="img/hongbao10.png">
 				<p>暂无转账记录</p>
 			</div>
 		</div>
@@ -47,7 +48,7 @@
 	<script type="text/javascript">
 		var yonghu = yonghu()
 		var myDate = new Date();
-		var date = myDate.getFullYear()+'-'+ (myDate.getMonth()+1)+'-'+myDate.getDate(); //获取当前时间作为最大时间!
+		var date = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate(); //获取当前时间作为最大时间!
 		$(document).ready(function() {
 			var token = localStorage.getItem('token')
 			// var calendar = new datePicker();
@@ -67,32 +68,40 @@
 			// 	},
 			// 	'onClose': function() { /*取消时触发事件*/ }
 			// });
-			
-			$aJax.get('/api/member/myhblists',{
-				user_token:token,
-				type:1,
-			},function(res){
+
+			$aJax.get('/api/member/myhblists', {
+				user_token: token,
+				type: 1,
+			}, function(res) {
 				console.log(res)
 				var data = res.data.lists;
-				
-				if(data){
-					var html = data.map(function(item){
-						if(item.receive_user_info){
+				//按照最新时间排序
+				if (data) {
+					 data.sort(function(a, b) {
+						return b.create_time - a.create_time;
+					});
+				}
+				if (data) {
+					var html = data.map(function(item) {
+						if (item.receive_user_info) {
 							return `<li>
-										<img src="`+baseUrl+`${item.receive_user_info.cover}" >
+										<img src="` + baseUrl +
+								`${item.receive_user_info.cover}" >
 										<h3 class="line1">发给${item.receive_user_info.nickname}的转账 </h3>
 										<div class="num">-${item.price}元</div>
-										<p>`+getMyDate(item.create_time)+` <span style="display:${item.receive_status=="2"?'block':'none'}">已退款15.25元</span></p>
+										<p>` +
+								getMyDate(item.create_time) +
+								` <span style="display:${item.receive_status=="2"?'block':'none'}">已退款15.25元</span></p>
 									</li>`
 						}
-						
+
 					}).join('');
 					$('.list ul li').html(html)
 				}
 			})
-			
-			
-			
+
+
+
 		})
 	</script>
 </html>

@@ -16,19 +16,20 @@
 	<body>
 		<div class="p">
 			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；
 		</div>
 	</body>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
-			
+			$aJax.get('/api/other/getsingle', {
+				user_token: localStorage.getItem('token'),
+				id:1
+				//memberId:146
+			}, function(res) {
+				console.log("是否 ",res);
+				let agreement = res.data.content
+				$('.p').html(agreement)			
+			})		
 		})
 	</script>
 </html>

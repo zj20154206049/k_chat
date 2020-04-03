@@ -58,8 +58,8 @@
 			var token = localStorage.getItem('token')			
 			$aJax.get('/api/businesscard/getbusinesscardar',{
 				user_token:token,
-				// memberId:165,
-				memberId:memberId,
+				memberId:165,
+				// memberId:memberId,
 			},function(res){
 				console.log(res);
 				$('.box1').html(`<img src="`+res.data.cover+`" ><h3>`+res.data.nickname+`</h3><p>`+res.data.id+`</p>`)
@@ -89,31 +89,30 @@
 				var number = $('#number').val();
 				var val = $('.model_hongbao .hide').val();
 				var length = $('.model_hongbao .hide').val().length
-				if (length >= 6) {
+				if (length == 6) {
 					val = val.substring(0,6);
-					$('.model_hongbao .hide').val(val);
-					// 获取转账的内容
-					$aJax.post('/api/member/giveout',{
-						user_token:token,
-						total:$('#number').val(),
-					    to_uid:memberId,
-						remarks:$('#text').val(),
-						pay_password:val,
-					},function(res){
-						console.log(res);
-						
-						if(res.code=='1'){
-							layer.msg('发送成功');
-							setTimeout(function(){
-								window.location.href = '161zhuanzhangcc.html?id=' + res.data.transfer_id + '&total=' + number
-							},500)
-							// 
-						}else{
-							layer.msg(res.msg);
-						}
-					})
-					//给APP用!支付完成的回调
-					
+					$('.model_hongbao .hide').val(val);			
+					// 获取转账的内容				
+						$aJax.post('/api/member/giveout',{
+							user_token:token,
+							total:$('#number').val(),
+						    to_uid:memberId,
+							remarks:$('#text').val(),
+							pay_password:val,
+						},function(res){
+							console.log(res);						
+							if(res.code=='1'){
+								layer.msg('发送成功');
+								layer.closeAll()
+								setTimeout(function(){
+									window.location.href = '161zhuanzhangcc.html?id=' + res.data.transfer_id + '&total=' + number
+								},500)
+								// 
+							}else{
+								layer.msg(res.msg);
+							}
+						})
+						//给APP用!支付完成的回调											
 				}
 				dome(val)
 			})

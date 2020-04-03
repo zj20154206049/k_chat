@@ -12,7 +12,8 @@
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
 	<body style="background: #F5F6F9;">
 		<div class="content notice">
-			<div class="box1" style="display: none;"> 
+			<!-- 充值 -->
+			<div class="box2" style="display: none;">
 				<ul>
 					<li>
 						<div class="time">2019-12-02 14:56</div>
@@ -25,7 +26,11 @@
 							</dl>
 						</div>
 					</li>
-					<!-- 	<li>
+				</ul>
+			</div>
+			<div class="box1" style="display: none;">
+				<ul>
+					<li>
 						<div class="time">2019-12-02 14:56</div>
 						<div class="text">
 							<div class="title">发起提现</div>
@@ -33,7 +38,7 @@
 							<p><span>￥</span>68.25</p>
 							<dl>
 								<dt>提现手续费</dt>
-								<dd>3%</dd>
+								<dd>1%</dd>
 							</dl>
 							<dl>
 								<dt>提现时间</dt>
@@ -44,58 +49,101 @@
 								<dd>建设银行 6217 0035 3005 698</dd>
 							</dl>
 						</div>
-					</li> -->
+					</li>
 				</ul>
 			</div>
 		</div>
 	</body>
+	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/datePicker.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		var myDate = new Date();
+		var date = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate(); //获取当前时间作为最大时间!
 		$(document).ready(function() {
 			var user_token = localStorage.getItem('token')
-			loading(); //加载通用loading层
+			// loading(); //加载通用loading层
 			$aJax.get('/api/member/financelog', {
 				user_token: user_token,
-				type: 5,
+				// type:'',
 				page: 1,
-				num: 5
+				num: 10000000
 			}, function(res) {
 				console.log(res);
-				var unixTimestamp = new Date(res.data[0].create_time * 1000);
-				var update = new Date(res.data[0].update_time * 1000);
-				Date.prototype.toLocaleString = function() {
-					return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate() + "-" + this.getHours() + ":" +
-						this.getMinutes() + ":" + this.getSeconds();
-				};
-				commonTime = unixTimestamp.toLocaleString();
-				updatetime = update.toLocaleString();
+				//提现
+				var cash = ''
 				var box2Html = ''
 				if (res.data) {
-
-					box2Html =
-						`<div class="content notice">
-						<div class="box1">
-							<ul>
-								<li>
-									<div class="time">` + updatetime +`</div>
-									<div class="text">
-										<h3>充值金额</h3>
-										<p><span>￥</span>` +
-						res.data[0].change + `</p>
-										<dl>
-											<dt>充值时间</dt>
-											<dd>` + commonTime +
-						`</dd>
-										</dl>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>`
-					$('.box1').html(box2Html);
-					$('.box1').css('display', 'block')
-
-				}
+					res.data.map(item => {
+						if (item.type == 6) {
+							cash +=
+								`<div class="content notice">
+							 						<div class="box1">
+							 							<ul>
+							 								<li>
+							 								<div class="time">` +
+								getMyDate(item.create_time) +
+								`</div>
+							 								<div class="text">
+							 									<div class="title">发起提现</div>
+							 									<h3>提现金额</h3>
+							 									<p><span>￥</span>` +
+								item.withdrawal_info.true_money +
+								`</p>
+							 									<dl>
+							 										<dt>提现手续费</dt>
+							 										<dd>1%</dd>
+							 									</dl>
+							 									<dl>
+							 										<dt>提现时间</dt>
+							 										<dd>
+							                                    ` +
+								getMyDate(item.create_time) +
+								`</dd>
+							 									</dl>
+							 									<dl>
+							 										<dt>提现账户</dt>
+							 										<dd>` +
+								item.withdrawal_info.bank_name + ` ` +
+								item.withdrawal_info.bank_number +
+								`</dd>
+							 									</dl>
+							 								</div>
+							 								</li>
+							 							</ul>
+							 						</div>
+							 					</div>`
+							$('.box1').html(cash);
+							$('.box1').css('display', 'block')
+						} else if (item.type == 5) {
+							box2Html +=
+								`<div class="content notice">
+													<div class="box2">
+														<ul>
+															<li>
+																<div class="time">` +
+								getMyDate(item.create_time) +
+								`</div>
+																<div class="text">
+																	<h3>充值金额</h3>
+																	<p><span>￥</span>` +
+								item.change + `</p>
+																	<dl>
+																		<dt>充值时间</dt>
+																		<dd>` +
+								getMyDate(item.create_time) +
+								`</dd>
+																	</dl>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>`
+							$('.box2').html(box2Html);
+							$('.box2').css('display', 'block')
+						}
+					})
+				}		
 			});
 		})
 	</script>

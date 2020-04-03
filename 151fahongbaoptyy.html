@@ -92,7 +92,7 @@
 			$(document).on('keyup','.model_hongbao .hide',function(){
 				var val = $('.model_hongbao .hide').val();
 				var length = $('.model_hongbao .hide').val().length
-				if (length >= 6) {
+				if (length == 6) {
 					val = val.substring(0,6);
 					$('.model_hongbao .hide').val(val);
 					// 获取红包的内容

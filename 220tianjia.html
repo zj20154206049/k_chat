@@ -15,7 +15,7 @@
 	<body style="background: #F5F6F9;">
 		<div class="content search">
 			<div class="tab_top">
-				<ul>
+				<ul> 
 					<li class="on" id="frend">加好友</li>
 					<li id="group">加群聊</li>
 				</ul>
@@ -65,7 +65,7 @@
 							if(res.data[0].isFriend == 0) {
 								window.location.href = '211mingpian_bushihaoyou.html?data=' + encode(JSON.stringify(res.data[0]))
 							} else {
-								window.location.href = '210mingpian.html?data=' + encode(JSON.stringify(res.data[0]))
+								window.location.href = '210mingpian.html?data=' + encode(JSON.stringify(res.data[0]))							
 							}
 						} else {
 							layer.msg('用户不存在');

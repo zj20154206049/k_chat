@@ -28,6 +28,7 @@
 	<script src="js/isIphonex.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		var yonghu = yonghu()
 		$(document).ready(function() {
 			var id = getUrlParam('id');
 			// /api/member/hbinfo   /api/member/openhb
@@ -39,10 +40,6 @@
 				if (res.data.lists) {
 					$('#total').html(`<span>￥</span>` + res.data.lists.price + ``);
 					if (res.data.lists.receive_status == '0') {
-						// if (res.data.info.id == id) {
-						// 	$('#text').text('支付成功，待好友收款')
-						// 	$('button').hide(0);
-						// }
 						$('#text').text('支付成功，待好友收款')
 					} else if (res.data.lists.receive_status == '1') {
 						$('#text').text('收款成功');
@@ -55,7 +52,10 @@
 					//自己看转账情况,则隐藏确认收款按钮
 					$('#total').html(`<span>￥</span>` + res.data.info.price + ``);
 					if (res.data.info.receive_status == '0') {
-						$('#text').text('支付成功，待好友收款')
+						if (res.data.give_user.id == yonghu.id) {
+							$('#text').text('支付成功，待好友收款')
+							$('button').hide(0);
+						}
 					} else if (res.data.info.receive_status == '1') {
 						$('#text').text('收款成功');
 						$('button').hide(0);

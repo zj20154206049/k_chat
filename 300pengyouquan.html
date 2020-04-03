@@ -159,7 +159,7 @@
 			// /api/dynamic/getmsglists
 			// $('.box2').css('display','block')
 			$aJax.get('/api/dynamic/getmsglists',{
-				user_token:user_token,
+				user_token: user_token,
 				readedType:0,
 				p:1,
 				num:99,
@@ -187,7 +187,7 @@
 				loadDownFn : function(me){
 					//推荐工会memberId:会员ID id:公会ID
 					$aJax.get('/api/dynamic/getlists',{
-						user_token:user_token,
+						user_token: user_token,
 						p:p,
 						num:5,
 					}, function(res) {
@@ -357,7 +357,7 @@
 			
 			//点击朋友圈封面,更换封面的时候触发
 			$('.box1 .big-img').click(function(){
-				// window.location.href = 'www.genghuanxiangce.com'
+				window.location.href = 'www.genghuanxiangce.com'
 				var html = '<div class="model4">'+$('.model4').html()+'</div>'
 				layer.open({
 					title:false,

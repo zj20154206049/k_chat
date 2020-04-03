@@ -72,6 +72,8 @@
 
 			$aJax.get('/api/groupbasic/getgroupmsglist', {
 				user_token: user_token,
+				p:1,
+				num:100
 			}, function(res) {
 				console.log('zj',res.data); 
 				var box2Html = ''

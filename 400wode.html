@@ -89,6 +89,10 @@
 				z-index: 9999;
 				width: 90%;
 			}
+
+			.version {
+				display: inline-block;
+			}
 		</style>
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
@@ -158,8 +162,8 @@
 						<div class="img">
 							<img style="width: 0.34rem;" src="img/wode07.png">
 						</div>
-						APP版本
-						<span>1.0.0</span>
+						<div class="version">APP版本</div>
+						<span id="num">1.0.0</span>
 					</li>
 				</ul>
 			</div>
@@ -177,7 +181,7 @@
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		var yonghu = yonghu();	
+		var yonghu = yonghu();
 		$.ajax({
 			type: 'GET',
 			url: ajaxUrl + '/api/member/getinfo',
@@ -188,7 +192,25 @@
 				localStorage.setItem("userInf", JSON.stringify(yonghu))
 			}
 		});
-		$(document).ready(function() {	
+
+		$(document).ready(function() {
+			var u = navigator.userAgent;//获取手机型号
+			//检查版本号
+			$aJax.get('/api/other/getversion', {
+				user_token: token,
+			}, function(res) {
+				console.log('版本号', res);
+				var az = res.data.ANDROID_VERSION_NUM
+				var ios = res.data.IOS_VERSION_NUM
+				if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) { //安卓手机
+					$(".version").html(az.title)
+					$("#num").html(az.value)
+				} else if (u.indexOf('iPhone') > -1) { //苹果手机
+					$(".version").html(ios.title)
+					$("#num").html(ios.value)
+				}
+
+			})
 			$('.box1').html(`<a href="441updateperson.html?name=` + yonghu.nickname + ` &path= ` + yonghu.coverPath +
 				` &num= ` + yonghu.id + ` "><img class="avatar" src="` + yonghu.coverPath + `" ></a>
 								<h3>` + yonghu.nickname +

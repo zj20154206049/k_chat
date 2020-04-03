@@ -44,6 +44,7 @@
 	<script src="js/datePicker.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		var yonghu = yonghu()
 		var token = localStorage.getItem('token')
 		$aJax.get('/api/member/myhblists', {
 			user_token: token,
@@ -56,7 +57,12 @@
 			var boxhtml = "";
 			var boxhtmlprice = "";
 			var sumprice = 0;
-		
+		    //按照最新时间排序
+		    if (data) {
+		    	 data.sort(function(a, b) {
+		    		return b.create_time - a.create_time;
+		    	});
+		    }
 			if (data && data.length > 0) {
 				data.forEach(imp => {
 					sumprice = parseInt(imp.price) + sumprice
@@ -116,6 +122,12 @@
 				}, function(res) {
 					console.log(res)
 					var data = res.data.lists;
+					//按照最新时间排序
+					if (data) {
+						 data.sort(function(a, b) {
+							return b.create_time - a.create_time;
+						});
+					}
 					// var listlength = data.length
 					// console.log(listlength)
 					var boxhtml = "";
@@ -179,6 +191,12 @@
 				}, function(res) {
 					console.log(res)
 					var data = res.data.lists;
+					//按照最新时间排序
+					if (data) {
+						 data.sort(function(a, b) {
+							return b.create_time - a.create_time;
+						});
+					}
 					// var listlength = data.length
 					// console.log(listlength)
 					var boxhtml = "";

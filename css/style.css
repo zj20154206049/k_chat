@@ -1595,6 +1595,74 @@
 	left: 0.3rem;
 	top: 0.3rem;
 }
+/* 充值样式 */
+.notice .box2{
+	padding: 0 0.3rem;
+}
+.notice .box2 ul li{
+	margin-bottom: 0.2rem;
+}
+.notice .box2 ul li .time{
+	font-size:0.24rem;
+	font-family:PingFang SC;
+	font-weight:500;
+	color:rgba(148,148,148,1);
+	line-height:0.68rem;
+	text-align: center;
+}
+.notice .box2 ul li .text{
+	width:100%;
+	background:#fff;
+	border-radius:0.1rem;
+	padding: 0.8rem 0 0;
+	position: relative;
+}
+.notice .box2 ul li .text h3{
+	font-size:0.3rem;
+	font-family:PingFang SC;
+	font-weight:500;
+	color:rgba(100,100,100,1);
+	line-height:0.3rem;
+	text-align: center;
+}
+.notice .box2 ul li .text p{
+	font-size:0.58rem;
+	font-family:PingFang SC;
+	font-weight:bold;
+	color:rgba(34,34,34,1);
+	line-height:0.58rem;
+	text-align: center;
+	margin: 0.2rem 0 0.82rem;
+}
+.notice .box2 ul li .text p span{
+	font-size: 0.3rem;
+}
+.notice .box2 ul li .text dl{
+	padding: 0 0.3rem;
+	border-top: 1px solid #EBECF4;
+	font-size:0.26rem;
+	font-family:PingFang SC;
+	font-weight:500;
+	color:rgba(148,148,148,1);
+	line-height:1.06rem;
+}
+.notice .box2 ul li .text dl dt{
+	display: table-cell;
+	width: 1.8rem;
+}
+.notice .box2 ul li .text dl dd{
+	display: table-cell;
+}
+.notice .box2 ul li .text .title{
+	position: absolute;
+	font-size:0.26rem;
+	font-family:PingFang SC;
+	font-weight:500;
+	color:rgba(100,100,100,1);
+	line-height:0.26rem;
+	left: 0.3rem;
+	top: 0.3rem;
+}
 
 .payment{
 	padding-top: 0.88rem;
