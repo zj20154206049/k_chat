@@ -58,8 +58,8 @@
 			var token = localStorage.getItem('token')			
 			$aJax.get('/api/businesscard/getbusinesscardar',{
 				user_token:token,
-				memberId:165,
-				// memberId:memberId,
+				// memberId:165,
+				memberId:memberId,
 			},function(res){
 				console.log(res);
 				$('.box1').html(`<img src="`+res.data.cover+`" ><h3>`+res.data.nickname+`</h3><p>`+res.data.id+`</p>`)

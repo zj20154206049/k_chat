@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>帮助中心</title> 
+		<title>用户协议</title> 
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
@@ -15,20 +15,22 @@
 	</style>
 	<body>
 		<div class="p">
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加
-			
-			此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；此为用户协议文本，具体内容待后台添加，此仅为样式展示作用；
+	
 		</div>
 	</body>
-	
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+			var id = getUrlParam('id')
+			$aJax.get('/api/other/getsingle', {
+				user_token: localStorage.getItem('token'),
+				id:id
+				//memberId:146
+			}, function(res) {
+				console.log("是否 ",res);
+				let agreement = res.data.content
+				$('.p').html(agreement)			
+			})	
 			
 		})
 	</script>

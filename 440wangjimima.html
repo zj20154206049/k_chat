@@ -6,7 +6,7 @@
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
@@ -34,67 +34,65 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var mobile = $('#mobile').val();
-			
+
 			var loading = false;
-			var time  = 60;
-			$('.code').click(function () {
+			var time = 60;
+			$('.code').click(function() {
 				mobile = $('#mobile').val();
-				if(!(/^1[3456789]\d{9}$/.test(mobile))){
+				if (!(/^1[3456789]\d{9}$/.test(mobile))) {
 					layer.msg('请输入正确的手机号码');
-					return false; 
+					return false;
 				}
-				if(loading == false){
+				if (loading == false) {
 					$aJax.post("/api/sendcode/mobile", {
-						mobile:mobile
-					} ,function (e) {
-					    layer.msg(e.msg);
-						if(e.code=='1'){
+						mobile: mobile
+					}, function(e) {
+						layer.msg(e.msg);
+						if (e.code == '1') {
 							loading = true;
-							var cTime = setInterval(function(){
-								if(time <= 1){
+							var cTime = setInterval(function() {
+								if (time <= 1) {
 									$('.code').text('重新获取');
 									loading = false;
 									clearInterval(cTime)
-								}else{
+								} else {
 									time = time - 1;
 									$('.code').text(time + 'S');
 								}
-							},1000)
+							}, 1000)
 						}
 					});
-				}else if(loading == true){
+				} else if (loading == true) {
 					layer.msg('请不要重复点击!');
 				}
-			    
+
 			});
-			
-			
-			$('#btn').click(function(){
-				var oldPassword = $('#oldPassword').val();
+
+			$('#btn').click(function() {
+				var mobile = $('#mobile').val();
+				var code = $('#code').val();
 				var password = $('#password').val();
-				var confirmPassword = $('#confirmPassword').val();
-				
-				if(password != confirmPassword){layer.msg('请输入两次一致的密码');return false;}
-				
-				$aJax.post('/api/member/forgetpaypassword',{
-					user_token:localStorage.getItem('token'),
-					mobile:mobile,
-					code:code,
-					newPassword:newPassword
-				},function(res){
+				if (mobile == "" || code =="" || password == "") {
+					layer.msg('请输入完整内容');
+					return false;
+				}
+				// if(password != confirmPassword){layer.msg('请输入两次一致的密码');return false;}
+
+				$aJax.post('/api/member/forgetpaypassword', {
+					user_token: localStorage.getItem('token'),
+					mobile: mobile,
+					code: code,
+					newPassword: password
+				}, function(res) {
 					console.log(res);
 					layer.msg(res.msg);
-					if(res.code=='1'){
-						setTimeout(function(){
+					if (res.code == '1') {
+						setTimeout(function() {
 							window.location.href = '440shezhi_zhanghao.html'
-						},1500)
+						}, 1500)
 					}
 				})
-				
-				
 			})
-			
-			
 		})
 	</script>
 </html>

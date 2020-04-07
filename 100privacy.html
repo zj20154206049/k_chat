@@ -21,9 +21,10 @@
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var id = getUrlParam('id')
 			$aJax.get('/api/other/getsingle', {
 				user_token: localStorage.getItem('token'),
-				id:3
+				id:id
 				//memberId:146
 			}, function(res) {
 				console.log("是否 ",res);
