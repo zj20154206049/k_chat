@@ -16,7 +16,7 @@
 				<img class="erweima" src="img/wode01.png">
 				<div class="user_info">
 					<div class="user_img">
-						<img src="" id="head"/>
+						<img src="" id="head" />
 					</div>
 					<div class="user_rig">
 						<div class="user_nick" id="name"></div>
@@ -26,23 +26,23 @@
 			</div>
 			<div class="list">
 				<ul>
-					<li>
-						<a href="www.fahaoyou.com">
-							<img src="img/erwm01.png">
+					<li >
+						<a id="fri">
+							<img src="img/erwm01.png"id="friend" >
 							<p>发送给好友</p>
 						</a>
 					</li>
 					<li>
-						<a href="www.faqunliao.com">
-							<img src="img/erwm02.png">
+						<a id="show">
+							<img src="img/erwm02.png" id="showImg">
 							<p>分享到群聊</p>
 						</a>
 					</li>
-					<li>
-						<!-- <a href="www.baocunxiangce.com"> -->
-							<img src="img/erwm03.png">
-							<p id="save">保存到相册</p>
-						<!-- </a> -->
+					<li >
+						<a id="sav" >
+						<img src="img/erwm03.png" id="save">
+						<p>保存到相册</p>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -51,11 +51,95 @@
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		var yonghu = yonghu();		          
+		var yonghu = yonghu();
 		$(document).ready(function() {
-	
+			$('#save').click(function() {
+				var img = $('img').attr('src');
+				// console.log("sdfsd", img)
+				// var img = "https://img.alicdn.com/bao/uploaded/TB1qimQIpXXXXXbXFXXSutbFXXX.jpg";
+				//var img = "http://127.0.0.1/base64/1.jpg";
+				function getBase64Image(img) {
+					var canvas = document.createElement("canvas");
+					canvas.width = img.width;
+					canvas.height = img.height;
+
+					var ctx = canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0, img.width, img.height);
+					var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+					var dataURL = canvas.toDataURL("image/" + ext);
+					return dataURL;
+				}
+				var image = new Image();
+				image.crossOrigin = '';
+				image.src = img;
+				
 			
-			$('#head').attr("src",yonghu.coverPath)
+				image.onload = function() {
+					var base64 = getBase64Image(image);
+					console.log(base64);
+					// setTimeout(()=>{
+						$('#sav').attr('href','www.baocunxiangce.com?src=' + base64)
+					// },1000)
+					
+				}
+				
+				
+			})
+			$('#showImg').click(function() {
+				var img = $('img').attr('src');
+				console.log("sdfsd", img)
+				// var img = "https://img.alicdn.com/bao/uploaded/TB1qimQIpXXXXXbXFXXSutbFXXX.jpg";
+				//var img = "http://127.0.0.1/base64/1.jpg";
+				function getBase64Image(img) {
+					var canvas = document.createElement("canvas");
+					canvas.width = img.width;
+					canvas.height = img.height;
+			
+					var ctx = canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0, img.width, img.height);
+					var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+					var dataURL = canvas.toDataURL("image/" + ext);
+					return dataURL;
+				}
+				var image = new Image();
+				image.crossOrigin = '';
+				image.src = img;
+				image.onload = function() {
+					var base64 = getBase64Image(image);
+					console.log(base64);
+					$('a').attr('href','www.faqunliao.com?src=' + base64)
+				}
+				
+			})
+			$('#friend').click(function() {
+				var img = $('img').attr('src');
+				console.log("sdfsd", img)
+				// var img = "https://img.alicdn.com/bao/uploaded/TB1qimQIpXXXXXbXFXXSutbFXXX.jpg";
+				//var img = "http://127.0.0.1/base64/1.jpg";
+				function getBase64Image(img) {
+					var canvas = document.createElement("canvas");
+					canvas.width = img.width;
+					canvas.height = img.height;
+			
+					var ctx = canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0, img.width, img.height);
+					var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+					var dataURL = canvas.toDataURL("image/" + ext);
+					return dataURL;
+				}
+				var image = new Image();
+				image.crossOrigin = '';
+				image.src = img;
+				image.onload = function() {
+					var base64 = getBase64Image(image);
+					console.log(base64);
+					$('a').attr('href','www.fahaoyou.com?src=' + base64)
+				}
+				
+			})
+
+
+			$('#head').attr("src", yonghu.coverPath)
 			$('#name').html(yonghu.nickname)
 			let id = getUrlParam('id');
 			var token = localStorage.getItem('token')
@@ -67,10 +151,10 @@
 			let href = ajaxUrl + '/api/other/getqrcode?user_token' + token + '&data=' + JSON.stringify(dat);
 			console.log(href)
 			$(".erweima").attr("src", href)
-			
-			$("#save").click(function(){
-			   
-			              
+
+			$("#save").click(function() {
+
+
 			});
 		})
 	</script>

@@ -103,13 +103,14 @@
 
 			<div class="list">
 				<a href="www.genggaitouxiang.com">
-				<div class="flex" id="upload">
-					<div class="name">头像</div>
-					<label for="fileinput" id="tip" style="display:inline-block;">
-						<img src="" class="nick" id="head" />
-						<input type="file" id="fileinput" accept="image/gif, image/jpeg, image/png" style="display: none;" />
-					</label>
-				</div></a>
+					<div class="flex" id="upload">
+						<div class="name">头像</div>
+						<label for="fileinput" id="tip" style="display:inline-block;" >
+							<img src="" class="nick" id="head" />
+							<input type="file" id="fileinput" accept="image/gif, image/jpeg, image/png" style="display: none;" />
+						</label>
+					</div>
+				</a>
 				<a href="442updatenick.html">
 					<div class="flex">
 						<div class="name">昵称</div>
@@ -121,7 +122,7 @@
 					<div class="name">ID</div>
 					<div class="id" id="num"></div>
 				</div>
-					<button type="button" class="btn4">保存</button>
+				<button type="button" class="btn4">保存</button>
 			</div>
 		</div>
 	</body>
@@ -147,14 +148,12 @@
 				}, function(res) {
 					layer.msg('保存成功');
 					// console.log(yonghu.nickname)
-					setTimeout(function(){				
-						window.location.href = '400wode.html?myname='  + yonghu.nickname 
-					},1000)	
+					setTimeout(function() {
+						window.location.href = '400wode.html?myname=' + yonghu.nickname
+					}, 1000)
 				})
 			})
-
 			$("#fileinput").change(function(e) {
-				// var sj = '';
 				var file = e.target.files[0];
 				var formData = new FormData()
 				formData.append('file', file);
@@ -179,7 +178,6 @@
 							history.go(0)
 							// $('#head').attr("src", yonghu.coverPath)
 						});
-
 
 					},
 					error: function(err) {

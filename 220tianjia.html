@@ -15,42 +15,44 @@
 	<body style="background: #F5F6F9;">
 		<div class="content search">
 			<div class="tab_top">
-				<ul> 
+				<ul>
 					<li class="on" id="frend">加好友</li>
 					<li id="group">加群聊</li>
 				</ul>
 			</div>
-			<div class="box1">
-				<label>
-					<img src="img/tianjia02.png" >
-					<input type="text" name="sousuo" id="sousuo" placeholder="搜索好友ID" />
-				</label>
+			<div class="box1">		
+					<label>
+						<img src="img/tianjia02.png">
+						<form action="JavaScript:return true">
+						<input type="text" name="sousuo" id="sousuo" placeholder="搜索好友ID" />
+						</form>
+					</label>	
 				<a href="www.saoyisao.com"><label class="on">
-					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
-					<span>扫码添加</span>
-				</label></a>
+						<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png">
+						<span>扫码添加</span>
+					</label></a>
 			</div>
 			<!-- 加群聊 -->
 			<div class="box2" style="display: none;">
 				<label>
-					<img src="img/tianjia02.png" >
+					<img src="img/tianjia02.png">
 					<input type="text" name="sousuo" id="sousuo" placeholder="搜索群聊ID" />
 				</label>
 				<a href="www.saoyisao.com"><label class="on">
-					<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png" >
-					<span>扫码添加</span>
-				</label></a>
+						<img style="width: 0.33rem;height: 0.33rem;" src="img/tianjia01.png">
+						<span>扫码添加</span>
+					</label></a>
 			</div>
-			
+
 		</div>
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		if (location.href.indexOf("qrresult=")>-1)
-		    alert(location.href.split("qrresult=")[1]);
+		if (location.href.indexOf("qrresult=") > -1)
+			alert(location.href.split("qrresult=")[1]);
 		$(function() {
 			$('#sousuo').bind('keypress', function(event) {
-				if(event.keyCode == "13") {
+				if (event.keyCode == "13") {
 					// alert(1221)
 					let name = $('#sousuo').val();
 					console.log(name)
@@ -61,11 +63,11 @@
 					}, function(res) {
 						console.log(res);
 						// layer.msg(res.msg);  setTimeout(function(){ },800)
-						if(res.data.length > 0) {
-							if(res.data[0].isFriend == 0) {
+						if (res.data.length > 0) {
+							if (res.data[0].isFriend == 0) {
 								window.location.href = '211mingpian_bushihaoyou.html?data=' + encode(JSON.stringify(res.data[0]))
 							} else {
-								window.location.href = '210mingpian.html?data=' + encode(JSON.stringify(res.data[0]))							
+								window.location.href = '210mingpian.html?data=' + encode(JSON.stringify(res.data[0]))
 							}
 						} else {
 							layer.msg('用户不存在');
@@ -73,18 +75,18 @@
 					})
 				}
 			});
-			$(document).on('click','#frend',function(){
+			$(document).on('click', '#frend', function() {
 				$('.tab_top ul li').removeClass('on');
 				$(this).addClass('on');
 				$(".box1").show();
 				$(".box2").hide();
-			})	
-			$(document).on('click','#group',function(){
+			})
+			$(document).on('click', '#group', function() {
 				$('.tab_top ul li').removeClass('on');
 				$(this).addClass('on');
 				$(".box2").show();
 				$(".box1").hide();
-			})	
+			})
 		});
 	</script>
 

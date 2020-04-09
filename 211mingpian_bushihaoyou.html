@@ -44,9 +44,11 @@
 			console.log(data)
  			$(document).ready(function() {
 				$('.btn4').click(function(){
-					window.location.href = '225tianjiahaoyou.html?data=' + encode(JSON.stringify(data))
+					layer.msg('添加好友信息已发送');
+					setTimeout(()=>{
+						window.location.href = '225tianjiahaoyou.html?data=' + encode(JSON.stringify(data))
+					},1000)			
 				})
-			
 		})
 		console.log(data)
 		});
