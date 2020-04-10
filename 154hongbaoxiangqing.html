@@ -56,18 +56,28 @@
 					$('#name span').text(res.data.give_user.nickname);
 				}
 				$('#total span').text(res.data.info.all_price);
-				// var list = res.data.info;
-				// $('.title').text(`领取`+list.length+`/`+list.all_count+``)
+				 var list = res.data.info;
+				 $('.title').text(`领取`+res.data.lists.length+`/`+list.all_count+``)
 				var uesr = res.data.give_user;
 				var timer = res.data.info;
 				var html = '';
-				html = `<li>
+//				html = `<li>
+//								<img src="` + baseUrl +
+//					`${uesr.cover}" >
+//								<h3>${uesr.nickname} <span>${timer.price}元</span></h3>
+//								<p>` + getMyDate(
+//						`${timer.create_time}`) + `</p>
+//							</li>`
+				html = res.data.lists.map(function(item) {
+					return `<li>
 								<img src="` + baseUrl +
-					`${uesr.cover}" >
-								<h3>${uesr.nickname} <span>${timer.price}元</span></h3>
+					`${item.receive_user_info.cover}" >
+								<h3>${item.receive_user_info.nickname} <span>${item.price}元</span></h3>
 								<p>` + getMyDate(
-						`${timer.create_time}`) + `</p>
+						`${item.create_time}`) + `</p>
 							</li>`
+	
+				}).join('');
 				$('.list ul li').html(html)
 			})
 		})
