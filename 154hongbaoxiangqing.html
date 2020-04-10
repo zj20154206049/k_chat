@@ -45,7 +45,7 @@
 		$(document).ready(function() {
 			var id = getUrlParam('id');
 			var token = localStorage.getItem('token')
-			$aJax.get('/api/member/openhb', {
+			$aJax.get('/api/member/hbinfo', {
 				user_token: token,
 				id: id,
 				 // id: 165
