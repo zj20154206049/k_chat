@@ -64,9 +64,14 @@
 						console.log(res);
 						// layer.msg(res.msg);  setTimeout(function(){ },800)
 						if (res.data.length > 0) {
+							
 							if (res.data[0].isFriend == 0) {
-								window.location.href = '211mingpian_bushihaoyou.html?data=' + encode(JSON.stringify(res.data[0]))
+								localStorage.setItem("tps",1)
+//								window.location.href = '211mingpian_bushihaoyou.html'
+								// window.location.href = '211mingpian_bushihaoyou.html?data=' + encode(JSON.stringify(res.data[0]))
+								window.location.href = '211mingpian_bushihaoyou.html?data=' + res.data[0].id
 							} else {
+//								window.location.href = '210mingpian.html'
 								window.location.href = '210mingpian.html?data=' + encode(JSON.stringify(res.data[0]))
 							}
 						} else {

@@ -12,7 +12,7 @@
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
 	<body style="background: #F5F6F9;">
 		<div class="header on">
-			<a href="www.fanhui.com"><img class="go_back" src="img/fanhui.png"></a>
+			<a href="javascript:history.go(-1)"><img class="go_back" src="img/fanhui.png"></a>
 			<h1>转账记录</h1>
 			<!-- <span id="dateBtn"><img src="img/zhuanzhang04.png" ></span> -->
 		</div>
@@ -36,7 +36,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="no_list" style="display: none;">
+			<!--<div class="no_list" style="display: none;">-->
+			<div class="no_list">
 				<img src="img/hongbao10.png">
 				<p>暂无转账记录</p>
 			</div>
@@ -69,36 +70,36 @@
 			// 	'onClose': function() { /*取消时触发事件*/ }
 			// });
 
-			$aJax.get('/api/member/myhblists', {
-				user_token: token,
-				type: 1,
-			}, function(res) {
-				console.log(res)
-				var data = res.data.lists;
-				//按照最新时间排序
-				if (data) {
-					 data.sort(function(a, b) {
-						return b.create_time - a.create_time;
-					});
-				}
-				if (data) {
-					var html = data.map(function(item) {
-						if (item.receive_user_info) {
-							return `<li>
-										<img src="` + baseUrl +
-								`${item.receive_user_info.cover}" >
-										<h3 class="line1">发给${item.receive_user_info.nickname}的转账 </h3>
-										<div class="num">-${item.price}元</div>
-										<p>` +
-								getMyDate(item.create_time) +
-								` <span style="display:${item.receive_status=="2"?'block':'none'}">已退款15.25元</span></p>
-									</li>`
-						}
-
-					}).join('');
-					$('.list ul li').html(html)
-				}
-			})
+//			$aJax.get('/api/member/myhblists', {
+//				user_token: token,
+//				type: 1,
+//			}, function(res) {
+//				console.log(res)
+//				var data = res.data.lists;
+//				//按照最新时间排序
+//				if (data) {
+//					 data.sort(function(a, b) {
+//						return b.create_time - a.create_time;
+//					});
+//				}
+//				if (data) {
+//					var html = data.map(function(item) {
+//						if (item.receive_user_info) {
+//							return `<li>
+//										<img src="` + baseUrl +
+//								`${item.receive_user_info.cover}" >
+//										<h3 class="line1">发给${item.receive_user_info.nickname}的转账 </h3>
+//										<div class="num">-${item.price}元</div>
+//										<p>` +
+//								getMyDate(item.create_time) +
+//								` <span style="display:${item.receive_status=="2"?'block':'none'}">已退款15.25元</span></p>
+//									</li>`
+//						}
+//
+//					}).join('');
+//					$('.list ul li').html(html)
+//				}
+//			})
 
 
 

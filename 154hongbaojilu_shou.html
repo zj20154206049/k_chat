@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>红包记录</title>
@@ -10,10 +11,11 @@
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+
 	<body>
 		<div class="content fahongbao">
 			<div class="header" style="background: #EA4158;">
-				<a href="www.fanhui.com"><img class="go_back" src="img/jiantou.png"></a>
+				<a href="javascript:history.go(-1)"><img class="go_back" src="img/jiantou.png"></a>
 				<h1>红包记录</h1><span><img id="dateBtn" src="img/hongbao09.png"></span>
 			</div>
 			<div class="box1">
@@ -53,33 +55,33 @@
 			// to_uid:0,
 			// to_group_id:0
 		}, function(res) {
-			var data = res.data.lists;
-			var boxhtml = "";
-			var boxhtmlprice = "";
-			var sumprice = 0;
-		    //按照最新时间排序
-		    if (data) {
-		    	 data.sort(function(a, b) {
-		    		return b.create_time - a.create_time;
-		    	});
-		    }
-			if (data && data.length > 0) {
-				data.forEach(imp => {
-					sumprice = parseInt(imp.price) + sumprice
-					// console.log(sumprice)
-				})
-				boxhtml =
-					`<div class="box5">
-							<ul>
-								<li>				
-									<p>我一共收到` + data.length +
-					`个红包</p>
-									<h3>${sumprice}<span>元</span> </h3>								
-								</li>
-								</ul>								
-						</div>`
-				$('.box5').html(boxhtml)
-			} else {
+//			var data = res.data.lists;
+//			var boxhtml = "";
+//			var boxhtmlprice = "";
+//			var sumprice = 0;
+//			//按照最新时间排序
+//			if(data) {
+//				data.sort(function(a, b) {
+//					return b.create_time - a.create_time;
+//				});
+//			}
+//			if(data && data.length > 0) {
+//				data.forEach(imp => {
+//					sumprice = parseInt(imp.price) + sumprice
+//					// console.log(sumprice)
+//				})
+//				boxhtml =
+//					`<div class="box5">
+//							<ul>
+//								<li>				
+//									<p>我一共收到` + data.length +
+//					`个红包</p>
+//									<h3>${sumprice}<span>元</span> </h3>								
+//								</li>
+//								</ul>								
+//						</div>`
+//				$('.box5').html(boxhtml)
+//			} else {
 				boxhtml =
 					`<div class="box5">
 							<ul>
@@ -90,20 +92,20 @@
 								</ul>								
 						</div>`
 				$('.box5').html(boxhtml)
-			}
-			if (data) {
-				var html = data.map(function(item) {
-					if (item.receive_user_info) {
-						return `<li>
-						<h3>拼手气红包 <span>${item.price}元</span></h3>
-						<p>` + getMyDate(item.create_time) +
-							`<span>已领完</span></p>					
-								</li>`
-					}
-		
-				}).join('');
-				$('.box6 ul li').html(html)
-			}
+//			}
+//			if(data) {
+//				var html = data.map(function(item) {
+//					if(item.receive_user_info) {
+//						return `<li>
+//						<h3>拼手气红包 <span>${item.price}元</span></h3>
+//						<p>` + getMyDate(item.create_time) +
+//							`<span>已领完</span></p>					
+//								</li>`
+//					}
+//
+//				}).join('');
+//				$('.box6 ul li').html(html)
+//			}
 		})
 		var myDate = new Date();
 		var date = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate(); //获取当前时间作为最大时间!
@@ -123,8 +125,8 @@
 					console.log(res)
 					var data = res.data.lists;
 					//按照最新时间排序
-					if (data) {
-						 data.sort(function(a, b) {
+					if(data) {
+						data.sort(function(a, b) {
 							return b.create_time - a.create_time;
 						});
 					}
@@ -134,23 +136,23 @@
 					var boxhtmlprice = "";
 					var sumprice = 0;
 
-					if (data && data.length > 0) {
-						data.forEach(imp => {
-							sumprice = parseInt(imp.price) + sumprice
-							// console.log(sumprice)
-						})
-						boxhtml =
-							`<div class="box5">
-									<ul>
-										<li>				
-											<p>我一共收到` + data.length +
-							`个红包</p>
-											<h3>${sumprice}<span>元</span> </h3>								
-										</li>
-										</ul>								
-								</div>`
-						$('.box5').html(boxhtml)
-					} else {
+//					if(data && data.length > 0) {
+//						data.forEach(imp => {
+//							sumprice = parseInt(imp.price) + sumprice
+//							// console.log(sumprice)
+//						})
+//						boxhtml =
+//							`<div class="box5">
+//									<ul>
+//										<li>				
+//											<p>我一共收到` + data.length +
+//							`个红包</p>
+//											<h3>${sumprice}<span>元</span> </h3>								
+//										</li>
+//										</ul>								
+//								</div>`
+//						$('.box5').html(boxhtml)
+//					} else {
 						boxhtml =
 							`<div class="box5">
 									<ul>
@@ -161,20 +163,20 @@
 										</ul>								
 								</div>`
 						$('.box5').html(boxhtml)
-					}
-					if (data) {
-						var html = data.map(function(item) {
-							if (item.receive_user_info) {
-								return `<li>
-								<h3>拼手气红包 <span>${item.price}元</span></h3>
-								<p>` + getMyDate(item.create_time) +
-									`<span>已领完</span></p>					
-										</li>`
-							}
-
-						}).join('');
-						$('.box6 ul li').html(html)
-					}
+//					}
+//					if(data) {
+//						var html = data.map(function(item) {
+//							if(item.receive_user_info) {
+//								return `<li>
+//								<h3>拼手气红包 <span>${item.price}元</span></h3>
+//								<p>` + getMyDate(item.create_time) +
+//									`<span>已领完</span></p>					
+//										</li>`
+//							}
+//
+//						}).join('');
+//						$('.box6 ul li').html(html)
+//					}
 				})
 			})
 			$(document).on('click', '#group', function() {
@@ -192,8 +194,8 @@
 					console.log(res)
 					var data = res.data.lists;
 					//按照最新时间排序
-					if (data) {
-						 data.sort(function(a, b) {
+					if(data) {
+						data.sort(function(a, b) {
 							return b.create_time - a.create_time;
 						});
 					}
@@ -202,48 +204,58 @@
 					var boxhtml = "";
 					var boxhtmlprice = "";
 					var sumprice = 0;
-
-					if (data && data.length > 0) {
-						data.forEach(imp => {
-							sumprice = parseInt(imp.price) + sumprice
-							// console.log(sumprice)
-						})
-						boxhtml =
-							`<div class="revice_box">
+					boxhtml =
+						`<div class="revice_box">
 									<ul>
 										<li>				
-											<p>我一共收到` + data.length +
-							`个红包</p>
-											<h3>${sumprice}<span>元</span> </h3>								
-										</li>
-										</ul>								
-								</div>`
-						$('.revice_box').html(boxhtml)
-					} else {
-						boxhtml =
-							`<div class="revice_box">
-									<ul>
-										<li>				
-											<p>我一共收到0个红包</p>
+											<p>我一共发出0个红包</p>
 											<h3>0<span>元</span> </h3>								
 										</li>
 										</ul>								
 								</div>`
-						$('.revice_box').html(boxhtml)
-					}
-					if (data) {
-						var html = data.map(function(item) {
-							if (item.receive_user_info) {
-								return `<li>
-								<h3>拼手气红包 <span>${item.price}元</span></h3>
-								<p>` + getMyDate(item.create_time) +
-									`<span>已领完</span></p>					
-										</li>`
-							}
-
-						}).join('');
-						$('.box6 ul li').html(html)
-					}
+					$('.revice_box').html(boxhtml)
+					$('.box6 ul li').html("")
+					//					if (data && data.length > 0) {
+					//						data.forEach(imp => {
+					//							sumprice = parseInt(imp.price) + sumprice
+					//							// console.log(sumprice)
+					//						})
+					//						boxhtml =
+					//							`<div class="revice_box">
+					//									<ul>
+					//										<li>				
+					//											<p>我一共发出` + data.length +
+					//							`个红包</p>
+					//											<h3>${sumprice}<span>元</span> </h3>								
+					//										</li>
+					//										</ul>								
+					//								</div>`
+					//						$('.revice_box').html(boxhtml)
+					//					} else {
+					//						boxhtml =
+					//							`<div class="revice_box">
+					//									<ul>
+					//										<li>				
+					//											<p>我一共发出0个红包</p>
+					//											<h3>0<span>元</span> </h3>								
+					//										</li>
+					//										</ul>								
+					//								</div>`
+					//						$('.revice_box').html(boxhtml)
+					//					}
+//					if(data) {
+//						var html = data.map(function(item) {
+//							if(item.receive_user_info) {
+//								return `<li>
+//								<h3>拼手气红包 <span>${item.price}元</span></h3>
+//								<p>` + getMyDate(item.create_time) +
+//									`<span>已领完</span></p>					
+//										</li>`
+//							}
+//
+//						}).join('');
+//						$('.box6 ul li').html(html)
+//					}
 				})
 
 			})
@@ -267,4 +279,5 @@
 
 		})
 	</script>
+
 </html>

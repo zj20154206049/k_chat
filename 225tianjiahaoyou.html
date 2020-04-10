@@ -6,7 +6,7 @@
 	</head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
@@ -25,73 +25,81 @@
 			<div class="box2" style="">
 				<div class="title">验证信息</div>
 				<div class="text go_xuanze">
-					分组 <span id="fenzu">好友</span>
+					分组 <span id="fenzu" data-id="1">好友</span>
 				</div>
 			</div>
-			
+
 			<button type="button" class="btn3">发送</button>
 		</div>
 	</body>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			let data = JSON.parse(decode(getUrlParam('data')));
 			console.log(data)
-			if(data){
+			if (data) {
 				$('#name').html(data.nickname);
- 				$("#head").attr("src",data.cover);
- 				localStorage.setItem("data",JSON.stringify(data))
+				$("#head").attr("src", data.cover);
+				localStorage.setItem("data", JSON.stringify(data))
 			} else {
 				data = JSON.parse(localStorage.getItem("data"));
 				console.log(data)
 				$('#name').html(data.nickname);
- 				$("#head").attr("src",data.cover);
+				$("#head").attr("src", data.cover);
 			}
-			
+
 			let groupId = getUrlParam("groupId");
 			let title = decode(getUrlParam("title"));
-			if(groupId){
+			if (groupId) {
 				$('#fenzu').html(title);
-				$("#fenzu").attr("data-id",groupId);
+				$("#fenzu").attr("data-id", groupId);
 			}
-			
-			if(localStorage.getItem('text')){
+
+			if (localStorage.getItem('text')) {
 				$('#text').val(localStorage.getItem('text'))
 			}
 			//选择分组
-			$('.go_xuanze').click(function(){
+			$('.go_xuanze').click(function() {
 				var text = $('#text').val();
-				localStorage.setItem('text',text)
+				localStorage.setItem('text', text)
 				window.location.href = '226xuanzefenzu.html'
 			})
-			
-			$('.btn3').click(function(){
+			// var cli = true;
+			$('.btn3').click(function() {
+				// if (!cli) {
+				// 	return;
+				// }
 				var text = $('#text').val();
 				var groupId = $('#fenzu').attr("data-id");
-				$aJax.post('/api/buddy/applytofriend',{
-					user_token:localStorage.getItem('token'),
-					to_uid:data.id,
-					content:text,
-					from_set_group_id:groupId,
-					from_set_remark:'',
-					source:0,
-					source_group_id:0,
-					source_uid:0,
-					
-				},function(res){
+				if (!text || text.length < 1) {
+					text = "请求加为好友";
+				}
+				$aJax.post('/api/buddy/applytofriend', {
+					user_token: localStorage.getItem('token'),
+					to_uid: data.id,
+					content: text,
+					from_set_group_id: groupId,
+					from_set_remark: '',
+					source: 0,
+					source_group_id: 0,
+					source_uid: 0
+
+				}, function(res) {
 					console.log(res);
-					layer.msg(res.msg);
-					layer.msg('你的好友申请已提交');
-					if(res.code=='1'){
-//						setTimeout(function(){
-//							window.location.href = '210mingpian.html'
-//						},800)
-					}
-					
+					// cli = false
+					// layer.msg('你的好友申请已提交');
+					// setTimeout(function() {
+						// window.location.href = '210mingpian.html'
+					// }, 800)
+
 				})
+				layer.msg('你的好友申请已提交,即将返回上一页');
+				setTimeout(function() {
+					history.go(-1)
+				}, 2000)
 			})
-			
+
 		})
 	</script>
 </html>
